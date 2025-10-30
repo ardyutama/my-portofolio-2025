@@ -1,0 +1,83 @@
+@use 'mixins';
+
+$token-blue: #0368FC;
+$token-black: #111827;
+$token-yellow: #F0DB4F;
+$token-gray-light: #F4F4F0;
+$token-orange: #FCA503;
+$token-white: #FFFFFF;
+
+$space-xxs: 4px;
+$space-xs: 8px;
+$space-sm: 12px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-xxl: 40px;
+$space-xxxl: 48px;
+$space-mega: 64px;
+
+$font-family-heading: 'Sora', sans-serif;
+$font-family-body: 'IBM Plex Sans', sans-serif;
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-md: 1.125rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 2.25rem;
+$font-size-xxxl: 3rem;
+
+:root {
+  --bg-main: #{$token-white};
+  --bg-accent: #{$token-yellow};
+  --bg-primary: #{$token-blue};
+  --bg-card: #{$token-white};
+
+  --text-main: #{$token-black};
+  --text-light: #{$token-white};
+  --text-primary: #{$token-blue};
+
+  --border-main: #{$token-black};
+  --border-radius-pill: 50px;
+  --border-radius-card: 16px; 
+
+  --gap-xs: #{$space-xs};
+  --gap-sm: #{$space-sm};
+  --gap-md: #{$space-md};
+
+  --padding-btn-y: #{$space-sm};
+  --padding-btn-x: #{$space-lg};
+  --padding-card: #{$space-lg};
+  --padding-section-x: #{$space-lg};
+  --padding-section-y: #{$space-mega};
+
+  --margin-bottom-md: #{$space-md};
+  --margin-bottom-lg: #{$space-lg};
+  --margin-bottom-xl: #{$space-xl};
+  --margin-bottom-xxl: #{$space-xxl};
+
+  --font-family-heading: #{$font-family-heading};
+  --font-family-body: #{$font-family-body};
+
+  --font-size-body: #{$font-size-base};
+  --font-size-small: #{$font-size-sm};
+  --font-size-btn: #{$font-size-md};
+  --font-size-nav: #{$font-size-md};
+  
+  --font-size-h3: #{$font-size-xl};
+  --font-size-h2: #{$font-size-xxl};
+  --font-size-h1: #{$font-size-xxxl};
+}
+
+@include mixins.mq('md') {
+  :root {
+    --font-size-btn: #{$font-size-md};
+    --font-size-nav: #{$font-size-md};
+    
+    --font-size-h3: #{$font-size-xl};
+    --font-size-h2: #{$font-size-xxl};
+    --font-size-h1: #{$font-size-xxxl};
+  }
+}
