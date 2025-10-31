@@ -1,14 +1,3 @@
-<template>
-  <NuxtLink :to="to" class="btn" :class="`btn--${variant}`">
-    <span class="btn__text">
-      <slot />
-    </span>
-    <span v-if="$slots.icon" class="btn__icon">
-      <slot name="icon" />
-    </span>
-  </NuxtLink>
-</template>
-
 <script setup lang="ts">
 defineProps({
   to: {
@@ -22,14 +11,26 @@ defineProps({
 });
 </script>
 
+<template>
+  <NuxtLink :to="to" class="btn" :class="`btn--${variant}`">
+    <span class="btn__text">
+      <slot />
+    </span>
+    <span v-if="$slots.icon" class="btn__icon">
+      <slot name="icon" />
+    </span>
+  </NuxtLink>
+</template>
+
 <style lang="scss" scoped>
 @use '~/assets/scss/global' as *;
+@use 'sass:color';
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 0 0 var(--border-main);
+  box-shadow: 0 6px 0 0 var(--border-main);
   
   gap: var(--gap-xs);
   padding: var(--padding-btn-y) var(--padding-btn-x);
@@ -53,7 +54,7 @@ defineProps({
     border: 2px solid var(--border-main) ;
 
     &:hover {
-      background-color: darken($token-blue, 5%);
+      background-color: color.adjust($token-blue, $lightness: -5%);
     }
   }
 
@@ -71,5 +72,10 @@ defineProps({
     display: inline-flex;
     align-items: center;
   }
+}
+
+.btn:hover {
+  box-shadow: 0 2px 0 0 var(--border-main);
+  transform: translateY(2px);
 }
 </style>

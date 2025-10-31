@@ -4,7 +4,7 @@
       :icon-props="{
         'stroke-width': 2,
       }"
-  >
+    >
       <Hero />
     </IconoirProvider>
   </div>
