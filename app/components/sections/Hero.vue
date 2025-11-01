@@ -1,25 +1,27 @@
 <script lang="ts" setup>
 import Button from '../ui/Button.vue';
 import { Suitcase } from '@iconoir/vue';
-import AppHeader from '../global/AppHeader.vue';
+import Header from '../ui/Header.vue';
 </script>
 
 <template>
   <section class="hero-section" ref="heroSectionRef">
-    <AppHeader />
-    <div class="hero-image-card">
-      <div class="hero-photo__container">
-        <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero-photo__image" format="webp"
-          height="200px" preload />
+    <Header />
+    <div class="hero-image-headline">
+      <div class="hero-image-card">
+        <div class="hero-photo__container">
+          <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero-photo__image" format="webp"
+            height="200px" preload />
+        </div>
+        <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero-photo__flower" height="150px"
+          preload />
       </div>
-      <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero-photo__flower" height="150px"
-        preload />
+      <h1 class="hero-headline">
+        I’m <span>Ardy Putra</span>, I’m a
+        software engineer focused on
+        <span>website & applications</span>
+      </h1>
     </div>
-    <h1 class="hero-headline">
-      I’m <span>Ardy Putra</span>, I’m a
-      software engineer focused on
-      <span>website & applications</span>
-    </h1>
     <div class="hero-actions">
       <Button to="#projects" variant="primary">
         View My Works
@@ -76,7 +78,18 @@ import AppHeader from '../global/AppHeader.vue';
   @include mq('lg') {
     -webkit-mask-size: 50%;
   }
+}
 
+.hero-image-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $breakpoint-sm;
+
+  @include mq('lg') {
+    max-width: $breakpoint-md;
+    flex-direction: row;
+  }
 }
 
 .hero-image-card {
@@ -91,6 +104,7 @@ import AppHeader from '../global/AppHeader.vue';
   justify-content: center;
   overflow: hidden;
   margin-bottom: var(--margin-bottom-xl);
+  flex-shrink: 0;
 }
 
 .hero-photo {
@@ -137,6 +151,14 @@ import AppHeader from '../global/AppHeader.vue';
 
   span {
     color: var(--text-primary);
+  }
+
+  @include mq('md') {
+    font-size: var(--font-size-h2);
+  }
+
+  @include mq('lg') {
+    font-size: var(--font-size-h1);
   }
 }
 </style>
