@@ -7,6 +7,7 @@
     >
       <Hero />
       <Projects />
+      <Experiences />
     </IconoirProvider>
   </div>
 </template>
@@ -15,6 +16,7 @@
   import Hero from '~/components/sections/Hero.vue';
   import Projects from '~/components/sections/Projects.vue';
   import { IconoirProvider } from '@iconoir/vue';
+  import Experiences from '~/components/sections/Experiences.vue';
 </script>
 
 <style lang="scss" scoped>
