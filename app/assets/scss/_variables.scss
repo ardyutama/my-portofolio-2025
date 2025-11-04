@@ -47,12 +47,14 @@ $font-size-xxxl: 3rem;
   --gap-xs: #{$space-xs};
   --gap-sm: #{$space-sm};
   --gap-md: #{$space-md};
+  --gap-lg: #{$space-lg};
 
   --padding-btn-y: #{$space-sm};
   --padding-btn-x: #{$space-lg};
   --padding-card: #{$space-lg};
   --padding-section-x: #{$space-lg};
   --padding-section-y: #{$space-xxxl};
+  --padding-section-heading-y: #{$space-xs};
 
   --margin-bottom-md: #{$space-md};
   --margin-bottom-lg: #{$space-lg};
