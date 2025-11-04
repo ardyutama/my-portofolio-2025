@@ -64,7 +64,7 @@ import Header from '../ui/Header.vue';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-color: rgba($token-blue, 0.1);
+  background-color: rgb(from var(--bg-primary) r g b / 10%);
 
   mask-image: url('/images/wavy-grid-bg.svg');
   mask-position: center top;
@@ -84,10 +84,10 @@ import Header from '../ui/Header.vue';
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: $breakpoint-sm;
+  max-width: var(--container-max-width-sm);
 
   @include mq('lg') {
-    max-width: $breakpoint-md;
+    max-width: var(--container-max-width-md);
     flex-direction: row;
   }
 }
@@ -147,7 +147,7 @@ import Header from '../ui/Header.vue';
   text-align: left;
   color: var(--text-main);
   margin-bottom: var(--margin-bottom-xxl);
-  padding: 0 $space-md;
+  padding: 0 var(--padding-btn-y);
 
   span {
     color: var(--text-primary);

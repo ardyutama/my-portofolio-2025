@@ -1,0 +1,40 @@
+$token-blue: #0368FC;
+$token-black: #111827;
+$token-yellow: #F0DB4F;
+$token-gray-light: #F4F4F0;
+$token-orange: #FCA503;
+$token-white: #FFFFFF;
+
+$space-xxs: 4px;
+$space-xs: 8px;
+$space-sm: 12px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-xxl: 40px;
+$space-xxxl: 48px;
+$space-mega: 64px;
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+$breakpoints: (
+  'sm': $breakpoint-sm,
+  'md': $breakpoint-md,
+  'lg': $breakpoint-lg,
+  'xl': $breakpoint-xl,
+);
+
+$font-family-heading: 'Sora', sans-serif;
+$font-family-body: 'IBM Plex Sans', sans-serif;
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-md: 1.125rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-xxl: 2.25rem;
+$font-size-xxxl: 3rem;

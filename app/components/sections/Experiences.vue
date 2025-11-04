@@ -1,33 +1,41 @@
 <script lang="ts" setup>
 import ExperienceCard from '../ui/ExperienceCard.vue';
+import HeadingSection from '../ui/HeadingSection.vue';
 </script>
 
 <template>
   <section class="experiences">
     <div class="experiences__grid"></div>
     <div class="experiences__radial-overlay"></div>
-    <div class="experiences__content">
-      <div class="experience-cards-grid">
-        <ExperienceCard imageUrl="/images/ardy-putra-hitachi-photo.png" imageAlt="Hitachi Energy Project"
-          companyName="Hitachi Energy" duration="Feb 2024 - Current (1 Year X Month)" buttonText="What I've do"
-          buttonLink="#hitachi-details">
-          <template #logo>
-            <NuxtImg src="/images/logo-hitachi.svg" alt="Hitachi Logo" width="24" height="24" />
-          </template>
-        </ExperienceCard>
+    <div class="experiences__container">
+      <div class="experiences__content">
+        <HeadingSection>Things I’ve made</HeadingSection>
+        <div class="experiences__caption">
+          Figma ipsum component variant main layer. Variant rotate layout auto fill arrow. Overflow rectangle thumbnail list distribute pixel underline component editor invite.
+        </div>
+        <div class="experiences__card-grid">
+          <ExperienceCard imageUrl="/images/ardy-putra-hitachi-photo.png" imageAlt="Hitachi Energy Project"
+            companyName="Hitachi Energy" buttonLink="#hitachi-details">
+            <template #logo>
+              <NuxtImg src="/images/logo-hitachi.svg" alt="Hitachi Logo" width="24" height="24" />
+            </template>
+            <template #duration>
+              <span>Feb 2024 - Current <br /> (1 Year X Month)</span>
+            </template>
+          </ExperienceCard>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
+@use '~/assets/scss/global' as *;
+
 .experiences {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   min-height: 100vh;
-  justify-content: center;
   position: relative;
   overflow: hidden;
   background-color: #fff;
@@ -54,9 +62,33 @@ import ExperienceCard from '../ui/ExperienceCard.vue';
     -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, black);
   }
 
+  &__container {
+    padding: var(--padding-section-x) var(--padding-section-y);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+
   &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     position: relative;
+    align-items: center;
+    gap: var(--gap-lg);
     z-index: 20;
+    max-width: var(--container-max-width-sm);
+  }
+
+  &__caption {
+    font-family: var(--font-family-body);
+    font-weight: 600;
+  }
+
+  &__grid {
+    display: flex;
+
   }
 }
 </style>

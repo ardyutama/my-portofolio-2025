@@ -27,21 +27,21 @@ defineProps({
 @use 'sass:color';
 
 .btn {
+  @include shadow-button(6px);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 0 0 var(--border-main);
-  
   gap: var(--gap-xs);
   padding: var(--padding-btn-y) var(--padding-btn-x);
-  
+
   border-radius: var(--border-radius-pill);
   border: 2px solid var(--border-main);
-  
+
   font-family: var(--font-family-heading);
   font-size: var(--font-size-btn);
   font-weight: 600;
-  
+
   text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -51,11 +51,7 @@ defineProps({
     background-color: var(--bg-primary);
     color: var(--text-light);
     border-color: var(--bg-primary);
-    border: 2px solid var(--border-main) ;
-
-    &:hover {
-      background-color: color.adjust($token-blue, $lightness: -5%);
-    }
+    border: 2px solid var(--border-main);
   }
 
   &--outline {
@@ -75,7 +71,6 @@ defineProps({
 }
 
 .btn:hover {
-  box-shadow: 0 2px 0 0 var(--border-main);
-  transform: translateY(2px);
+  @include shadow-button-hover(2px);
 }
 </style>

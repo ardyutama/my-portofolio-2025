@@ -1,40 +1,12 @@
+@use 'tokens' as *;
 @use 'mixins';
-
-$token-blue: #0368FC;
-$token-black: #111827;
-$token-yellow: #F0DB4F;
-$token-gray-light: #F4F4F0;
-$token-orange: #FCA503;
-$token-white: #FFFFFF;
-$token-red: #D93737;
-
-$space-xxs: 4px;
-$space-xs: 8px;
-$space-sm: 12px;
-$space-md: 16px;
-$space-lg: 24px;
-$space-xl: 32px;
-$space-xxl: 40px;
-$space-xxxl: 48px;
-$space-mega: 64px;
-
-$font-family-heading: 'Sora', sans-serif;
-$font-family-body: 'IBM Plex Sans', sans-serif;
-
-$font-size-xs: 0.75rem;
-$font-size-sm: 0.875rem;
-$font-size-base: 1rem;
-$font-size-md: 1.125rem;
-$font-size-lg: 1.25rem;
-$font-size-xl: 1.5rem;
-$font-size-xxl: 2.25rem;
-$font-size-xxxl: 3rem;
 
 :root {
   --bg-main: #{$token-white};
   --bg-accent: #{$token-yellow};
   --bg-primary: #{$token-blue};
   --bg-card: #{$token-white};
+  --bg-white-light: #{$token-gray-light};
 
   --text-main: #{$token-black};
   --text-light: #{$token-white};
@@ -60,6 +32,11 @@ $font-size-xxxl: 3rem;
   --margin-bottom-lg: #{$space-lg};
   --margin-bottom-xl: #{$space-xl};
   --margin-bottom-xxl: #{$space-xxl};
+
+  --container-max-width-sm: #{$breakpoint-sm};
+  --container-max-width-md: #{$breakpoint-md};
+  --container-max-width-lg: #{$breakpoint-lg};
+  --container-max-width-xl: #{$breakpoint-xl};
 
   --font-family-heading: #{$font-family-heading};
   --font-family-body: #{$font-family-body};

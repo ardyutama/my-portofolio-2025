@@ -20,7 +20,7 @@
 
 .projects {
   &__section {
-    background-color: $token-gray-light;
+    background-color: var(--bg-white-light);
     min-height: 100vh;
   }
 
@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-lg);
-    max-width: $breakpoint-sm;
+    max-width: var(--container-max-width-sm);
   }
 
   &__caption {

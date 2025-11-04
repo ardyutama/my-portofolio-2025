@@ -8,8 +8,6 @@ interface ExperienceCardProps {
   imageHeight?: string | number;
 
   companyName: string;
-  duration: string;
-  buttonText: string;
   buttonLink: string;
 }
 
@@ -25,7 +23,8 @@ withDefaults(defineProps<ExperienceCardProps>(), {
     <div class="experience-card__image-wrapper">
       <NuxtImg :src="imageUrl" :alt="imageAlt" class="experience-card__image" format="webp" :width="imageWidth" :height="imageHeight"
         preload />
-      <div class="experience-card__flower"></div>
+      <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="experience-card__flower" height="150px"
+          preload />
     </div>
 
     <div class="experience-card__content">
@@ -33,16 +32,15 @@ withDefaults(defineProps<ExperienceCardProps>(), {
         <div v-if="$slots.logo" class="experience-card__logo">
           <slot name="logo" />
         </div>
-        <h3 class="experience-card__company-name">{{ companyName }}</h3>
-        <p class="experience-card__duration">{{ duration }}</p>
+        <div class="experience-card__duration">
+          <slot name="duration"/>
+        </div>
       </div>
-
-      <NuxtLink :to="buttonLink" class="experience-card__button">
-        {{ buttonText }}
-        <ArrowRight />
-      </NuxtLink>
-
     </div>
+    <NuxtLink :to="buttonLink" class="experience-card__button">
+        What I've do
+        <ArrowRight class="experience-card__button--icon"/>
+    </NuxtLink>
   </div>
 </template>
 
@@ -51,36 +49,27 @@ withDefaults(defineProps<ExperienceCardProps>(), {
 <style lang="scss" scoped>
 @use '~/assets/scss/global' as *;
 
+$token-hitachi-red: #FC2403;
+
 .experience-card {
+  @include shadow-card(4px);
   width: 100%;
-  max-width: 320px;
-  border-radius: var(--border-radius-card);
+  width: 240px;
   background-color: var(--bg-card);
-  border: 2px solid var(--border-main);
+  border: 3px solid var(--border-main);
   overflow: hidden;
-  box-shadow: 0 4px 0 0 var(--border-main);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 0 var(--border-main);
-  }
-  &:active {
-    transform: translateY(1px);
-    box-shadow: 0 3px 0 0 var(--border-main);
-  }
 
   @include mq('md') {
-    max-width: 360px;
+    width: 280px;
   }
 
   &__image-wrapper {
     position: relative;
     width: 100%;
     padding-top: 62.5%;
-    background-color: $token-yellow;
+    background-color: var(--bg-accent);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -89,20 +78,19 @@ withDefaults(defineProps<ExperienceCardProps>(), {
 
   &__image {
     position: absolute;
-    transform: translateY(30px) scale(0.5) translateX(30px);
+    transform: scale(0.5) translate(40px, 70px);
     object-fit: cover;
     z-index: 2;
+
+    @include mq('md') {
+       transform: scale(0.6) translate(40px, 70px);
+    }
   }
 
   &__flower {
     position: absolute;
-    width: 120px;
-    height: 120px;
-    background-color: $token-orange;
-    border-radius: 50% 50% 0 50%;
-    transform: rotate(45deg);
-    top: -30px;
-    right: -30px;
+    transform: scale(1.3) translate(0%, -50%);
+
     z-index: 1;
   }
 
@@ -113,6 +101,7 @@ withDefaults(defineProps<ExperienceCardProps>(), {
     gap: var(--gap-md);
     flex-grow: 1;
     justify-content: space-between;
+    border-top: 3px solid var(--border-main);
   }
 
   &__company-info {
@@ -143,7 +132,8 @@ withDefaults(defineProps<ExperienceCardProps>(), {
   }
 
   &__duration {
-    font-size: var(--font-size-small);
+    font-family: var(--font-family-heading);
+    font-weight: 600;
     color: var(--text-main);
     margin: 0;
   }
@@ -154,31 +144,18 @@ withDefaults(defineProps<ExperienceCardProps>(), {
     justify-content: center;
     gap: var(--gap-xs);
     padding: var(--padding-btn-y) var(--padding-btn-x);
-    border-radius: var(--border-radius-pill);
-    border: 2px solid;
     font-family: var(--font-family-heading);
     font-size: var(--font-size-btn);
     font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
-    transform: translateY(0);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     width: 100%;
-
-    background-color: $token-red;
-    border-color: $token-red;
+    border-top: 3px solid var(--border-main);
+    background-color: $token-hitachi-red;
     color: var(--text-light);
-    box-shadow: 0 4px 0 0 darken($token-red, 15%);
 
-    &:hover {
-      background-color: darken($token-red, 5%);
-      border-color: darken($token-red, 5%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 0 0 darken($token-red, 15%);
-    }
-    &:active {
-      transform: translateY(1px);
-      box-shadow: 0 3px 0 0 darken($token-red, 15%);
+    &--icon {
+      height: 18px;
+      width: 18px;
     }
   }
 }

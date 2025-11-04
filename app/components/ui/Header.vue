@@ -21,7 +21,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    padding: $space-sm;
+    padding: var(--gap-sm);
   }
 }
 </style>

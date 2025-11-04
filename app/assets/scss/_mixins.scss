@@ -1,16 +1,5 @@
 @use 'sass:map';
-
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-
-$breakpoints: (
-  'sm': $breakpoint-sm,
-  'md': $breakpoint-md,
-  'lg': $breakpoint-lg,
-  'xl': $breakpoint-xl,
-);
+@use 'tokens' as *;
 
 @mixin mq($key) {
   $size: map.get($breakpoints, $key);
@@ -22,4 +11,34 @@ $breakpoints: (
   } @else {
     @error 'Breakpoint key `#{$key}` not found in $breakpoints map.';
   }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin shadow-card($offset: 4px) {
+  box-shadow: $offset $offset 0 0 var(--border-main);
+}
+
+@mixin shadow-button($offset: 6px) {
+  box-shadow: 0 $offset 0 0 var(--border-main);
+}
+
+@mixin shadow-button-hover($offset: 6px) {
+  box-shadow: 0 $offset 0 0 var(--border-main);
+  transform: translateY($offset);
 }
