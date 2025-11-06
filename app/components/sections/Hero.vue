@@ -1,52 +1,51 @@
 <script lang="ts" setup>
-import Button from '../ui/Button.vue';
+import HeroButton from '../ui/HeroButton.vue';
 import { Suitcase } from '@iconoir/vue';
 import Header from '../ui/Header.vue';
 </script>
 
 <template>
-  <section class="hero-section" ref="heroSectionRef">
+  <section class="hero" ref="heroSectionRef">
     <Header />
-    <div class="hero-image-headline">
-      <div class="hero-image-card">
-        <div class="hero-photo__container">
-          <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero-photo__image" format="webp"
+    <div class="hero__content">
+      <div class="hero__image-card">
+        <div class="hero__photo-container">
+          <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero__photo" format="webp"
             height="200px" preload />
         </div>
-        <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero-photo__flower" height="150px"
+        <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero__flower" height="150px"
           preload />
       </div>
-      <h1 class="hero-headline">
-        I’m <span>Ardy Putra</span>, I’m a
+      <h1 class="hero__headline">
+        I'm <span class="hero__highlight">Ardy Putra</span>, I'm a
         software engineer focused on
-        <span>website & applications</span>
+        <span class="hero__highlight">website & applications</span>
       </h1>
     </div>
-    <div class="hero-actions">
-      <Button to="#projects" variant="primary">
+    <div class="hero__actions">
+      <HeroButton to="#projects" variant="primary">
         View My Works
         <template #icon>
           <Suitcase />
         </template>
-      </Button>
+      </HeroButton>
 
-      <div class="hero-actions__secondary">
-        <Button to="#contact" variant="outline">
+      <div class="hero__actions-secondary">
+        <HeroButton to="#contact" variant="outline">
           Get in Touch
-        </Button>
+        </HeroButton>
 
-        <Button to="#" variant="outline" target="_blank">
+        <HeroButton to="#" variant="outline" target="_blank">
           My Resume
-        </Button>
+        </HeroButton>
       </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/global' as *;
 
-.hero-section {
+.hero {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,30 +56,29 @@ import Header from '../ui/Header.vue';
   position: relative;
   overflow: hidden;
   isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgb(from var(--bg-primary) r g b / 10%);
+    mask-image: url('/images/wavy-grid-bg.svg');
+    mask-position: center top;
+    mask-repeat: no-repeat;
+    top: -10px;
+
+    @include mq('md') {
+      -webkit-mask-size: 80%;
+    }
+
+    @include mq('lg') {
+      -webkit-mask-size: 50%;
+    }
+  }
 }
 
-.hero-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-color: rgb(from var(--bg-primary) r g b / 10%);
-
-  mask-image: url('/images/wavy-grid-bg.svg');
-  mask-position: center top;
-  mask-repeat: no-repeat;
-  top: -10px;
-
-  @include mq('md') {
-    -webkit-mask-size: 80%;
-  }
-
-  @include mq('lg') {
-    -webkit-mask-size: 50%;
-  }
-}
-
-.hero-image-headline {
+.hero__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,14 +87,14 @@ import Header from '../ui/Header.vue';
   @include mq('lg') {
     max-width: var(--container-max-width-md);
     flex-direction: row;
+    align-items: flex-start;
   }
 }
 
-.hero-image-card {
+.hero__image-card {
   position: relative;
   width: 150px;
   height: 225px;
-
   border-radius: 24px;
   background-color: var(--bg-accent);
   display: flex;
@@ -105,30 +103,32 @@ import Header from '../ui/Header.vue';
   overflow: hidden;
   margin-bottom: var(--margin-bottom-xl);
   flex-shrink: 0;
-}
 
-.hero-photo {
-  &__container {
-    display: flex;
-    height: 100%;
-    position: relative;
-    align-items: flex-end;
-  }
-
-  &__image {
-    object-fit: cover;
-    z-index: 2;
-    object-position: 10px;
-  }
-
-  &__flower {
-    position: absolute;
-    top: -40px;
-    right: -40px;
+  @include mq('md') {
+    margin: 0px var(--padding-card);
   }
 }
 
-.hero-actions {
+.hero__photo-container {
+  display: flex;
+  height: 100%;
+  position: relative;
+  align-items: flex-end;
+}
+
+.hero__photo {
+  object-fit: cover;
+  z-index: 2;
+  object-position: 10px;
+}
+
+.hero__flower {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+.hero__actions {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,22 +136,18 @@ import Header from '../ui/Header.vue';
   gap: var(--gap-md);
 }
 
-.hero-actions__secondary {
+.hero__actions-secondary {
   display: flex;
   justify-content: center;
   gap: var(--gap-md);
 }
 
-.hero-headline {
+.hero__headline {
   font-size: var(--font-size-h3);
   text-align: left;
   color: var(--text-main);
   margin-bottom: var(--margin-bottom-xxl);
   padding: 0 var(--padding-btn-y);
-
-  span {
-    color: var(--text-primary);
-  }
 
   @include mq('md') {
     font-size: var(--font-size-h2);
@@ -160,5 +156,9 @@ import Header from '../ui/Header.vue';
   @include mq('lg') {
     font-size: var(--font-size-h1);
   }
+}
+
+.hero__highlight {
+  color: var(--text-primary);
 }
 </style>

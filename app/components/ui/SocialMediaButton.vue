@@ -24,7 +24,6 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/global' as *;
 
 $icon-size: 2rem;
 $padding-social-media-card: 12px;
@@ -38,8 +37,8 @@ $padding-social-media-card: 12px;
   justify-content: center;
   gap: var(--gap-sm);
   border: 3px solid var(--border-main);
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background-color: $token-white;
+  color: $token-black;
 
   &__icon {
     display: flex;

@@ -47,7 +47,6 @@ withDefaults(defineProps<ExperienceCardProps>(), {
 
 
 <style lang="scss" scoped>
-@use '~/assets/scss/global' as *;
 
 $token-hitachi-red: #FC2403;
 

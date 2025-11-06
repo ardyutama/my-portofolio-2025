@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import SocialMediaButton from '../ui/SocialMediaButton.vue';
 import { Instagram, Linkedin, GithubCircle, SendMail } from '@iconoir/vue';
+import ConnectMarquee from '../ui/ConnectMarquee.vue';
 </script>
 
 <template>
   <section class="connect">
     <div class="connect__grid"></div>
     <div class="connect__section">
-      <div class="connect__marquee"></div>
+      <ConnectMarquee />
       <div class="connect__container">
         <div class="connect__content">
           <h2 class="connect__heading">Just want to be fwiends :)</h2>
@@ -51,16 +52,23 @@ $background-black-shadow: rgb(from var(--text-main) r g b / 10%);
   position: relative;
   overflow: hidden;
   background-color: var(--bg-accent);
-  $marquee-height: 64px;
+
+  &__section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    z-index: 20;
+  }
 
   &__container {
     padding: var(--padding-section-x) var(--padding-section-y);
     display: flex;
+    flex: 1;
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - $marquee-height);
     justify-content: center;
     align-items: center;
+    height: 100%;
   }
 
   &__grid {
@@ -70,18 +78,6 @@ $background-black-shadow: rgb(from var(--text-main) r g b / 10%);
     background-image: linear-gradient(to right, $background-black-shadow 1px, transparent 1px), linear-gradient(to bottom, $background-black-shadow 1px, transparent 1px);
     background-size: 80px 80px;
     margin: 0 auto;
-  }
-
-  &__section {
-    display: flex;
-    flex-direction: column;
-    z-index: 20;
-  }
-
-  &__marquee {
-    width: 100%;
-    height: $marquee-height;
-    background-color: var(--bg-orange);
   }
 
   &__content {

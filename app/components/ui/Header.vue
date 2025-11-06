@@ -14,8 +14,6 @@
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/global' as *;
-
 .header {
   &__container {
     display: flex;

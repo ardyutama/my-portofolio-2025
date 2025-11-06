@@ -30,7 +30,6 @@ import HeadingSection from '../ui/HeadingSection.vue';
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/global' as *;
 
 .experiences {
   display: flex;

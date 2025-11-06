@@ -23,7 +23,6 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/global' as *;
 @use 'sass:color';
 
 .btn {
@@ -43,7 +42,6 @@ defineProps({
   font-weight: 600;
 
   text-decoration: none;
-  transition: all 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
 
@@ -70,7 +68,4 @@ defineProps({
   }
 }
 
-.btn:hover {
-  @include shadow-button-hover(2px);
-}
 </style>

@@ -15,6 +15,15 @@ export default defineNuxtConfig({
   css: [
     '~/assets/scss/main.scss'
   ],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/scss/_tokens.scss" as *; @use "~/assets/scss/_mixins.scss" as *;'
+        }
+      }
+    }
+  },
   modules: [
     '@nuxtjs/google-fonts',
     '@nuxt/image'
