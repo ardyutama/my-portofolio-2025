@@ -9,7 +9,7 @@ import HeadingSection from '../ui/HeadingSection.vue';
     <div class="experiences__radial-overlay"></div>
     <div class="experiences__container">
       <div class="experiences__content">
-        <HeadingSection>Things I’ve made</HeadingSection>
+        <HeadingSection>Experience</HeadingSection>
         <div class="experiences__caption">
           Figma ipsum component variant main layer. Variant rotate layout auto fill arrow. Overflow rectangle thumbnail list distribute pixel underline component editor invite.
         </div>

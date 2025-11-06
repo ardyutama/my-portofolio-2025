@@ -38,7 +38,7 @@
   box-shadow: 0 $offset 0 0 var(--border-main);
 }
 
-@mixin shadow-button-hover($offset: 6px) {
+@mixin shadow-button-hover($offset: 2px) {
   box-shadow: 0 $offset 0 0 var(--border-main);
   transform: translateY($offset);
 }
