@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "tree": "treee -l 4 --ignore \"node_modules/, vendor/, storage/\" --link"
   },
   "dependencies": {
     "@iconoir/vue": "^7.11.0",
@@ -19,6 +20,7 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "tree-cli": "^0.6.7"
   }
 }
