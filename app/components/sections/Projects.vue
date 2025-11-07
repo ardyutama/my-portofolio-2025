@@ -7,9 +7,7 @@
     <div class="projects__container">
       <div class="projects__content">
       <HeadingSection>Things I’ve made</HeadingSection>
-      <div class="projects__caption">
-        Figma ipsum component variant main layer. Variant rotate layout auto fill arrow. Overflow rectangle thumbnail list distribute pixel underline component editor invite.
-      </div>
+      <h4 class="projects__description">A featured showcase of technical solutions. Each projects details a problem, my solution, and the stack I used to ship it. Let’s dive in.</h4>
       </div>
     </div>
   </section>
@@ -39,8 +37,8 @@
     max-width: var(--container-max-width-sm);
   }
 
-  &__caption {
-    font-family: var(--font-family-body);
+  &__description {
+    font-size: var(--font-size-btn);
     font-weight: 600;
   }
 }

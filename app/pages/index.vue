@@ -5,20 +5,14 @@
         'stroke-width': 2,
       }"
     >
-      <Hero />
-      <Projects />
-      <Experiences />
-      <Connect />
+      <Home />
     </IconoirProvider>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import Hero from '~/components/sections/Hero.vue';
-  import Projects from '~/components/sections/Projects.vue';
-  import Experiences from '~/components/sections/Experiences.vue';
-  import Connect from '~/components/sections/Connect.vue';
   import { IconoirProvider } from '@iconoir/vue';
+  import Home from '~/components/sections/home/index.vue'
 </script>
 
 <style lang="scss" scoped>
