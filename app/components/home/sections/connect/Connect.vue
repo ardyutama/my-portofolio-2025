@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import SocialMediaButton from './SocialMediaButton.vue';
-import { Instagram, Linkedin, GithubCircle, SendMail } from '@iconoir/vue';
+import { Instagram, Linkedin, GithubCircle, SendMail, Copyright } from '@iconoir/vue';
 import ConnectMarquee from './ConnectMarquee.vue';
 </script>
 
@@ -36,6 +36,10 @@ import ConnectMarquee from './ConnectMarquee.vue';
             </template>
             Say Hello to my Email
           </SocialMediaButton>
+          <div class="connect__copyright-footer">
+            <Copyright />
+            <h4>2025 Ardy Putra Utama</h4>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +95,17 @@ $background-black-shadow: rgb(from var(--text-main) r g b / 10%);
 
   &__heading {
     text-align: center;
+  }
+
+  &__copyright-footer {
+    display: inline-flex;
+    align-items: center;
+    color: $token-white;
+    gap: $space-xs;
+
+    h4 {
+      margin-bottom: 0;
+    }
   }
 }
 </style>
