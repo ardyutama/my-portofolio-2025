@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
   import { IconoirProvider } from '@iconoir/vue';
-  import Home from '~/components/sections/home/index.vue'
+  import Home from '~/components/home/index.vue'
 </script>
 
 <style lang="scss" scoped>

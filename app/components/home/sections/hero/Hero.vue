@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import HeroButton from '../ui/HeroButton.vue';
+import HeroButton from './HeroButton.vue';
 import { Suitcase } from '@iconoir/vue';
-import Header from '../ui/Header.vue';
+import Header from '~/components/ui/Header.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import HeadingSection from '../ui/HeadingSection.vue';
+  import HeadingSection from '~/components/ui/HeadingSection.vue';
 </script>
 
 <template>
@@ -40,6 +40,7 @@
   &__description {
     font-size: var(--font-size-btn);
     font-weight: 600;
+    letter-spacing: 0.025em;
   }
 }
 </style>

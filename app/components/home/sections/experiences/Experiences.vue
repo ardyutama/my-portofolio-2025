@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import ExperienceCard from '../ui/ExperienceCard.vue';
-import HeadingSection from '../ui/HeadingSection.vue';
+import ExperienceCard from './ExperienceCard.vue';
+import HeadingSection from '~/components/ui/HeadingSection.vue';
 </script>
 
 <template>

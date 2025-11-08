@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import SocialMediaButton from '../ui/SocialMediaButton.vue';
+import SocialMediaButton from './SocialMediaButton.vue';
 import { Instagram, Linkedin, GithubCircle, SendMail } from '@iconoir/vue';
-import ConnectMarquee from '../ui/ConnectMarquee.vue';
+import ConnectMarquee from './ConnectMarquee.vue';
 </script>
 
 <template>
