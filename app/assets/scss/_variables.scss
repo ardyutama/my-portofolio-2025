@@ -42,7 +42,7 @@
   --font-family-heading: #{$font-family-heading};
   --font-family-body: #{$font-family-body};
 
-  --font-size-body: #{$font-size-base};
+  --font-size-body: #{$font-size-sm};
   --font-size-small: #{$font-size-sm};
   --font-size-btn: #{$font-size-sm};
   --font-size-nav: #{$font-size-md};
@@ -54,6 +54,7 @@
 
 @include mixins.mq('md') {
   :root {
+    --font-size-body: #{$font-size-md};
     --font-size-btn: #{$font-size-md};
     --font-size-nav: #{$font-size-md};
     

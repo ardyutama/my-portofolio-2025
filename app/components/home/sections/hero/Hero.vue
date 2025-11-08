@@ -68,7 +68,7 @@ import Header from '~/components/ui/Header.vue';
     mask-repeat: no-repeat;
     top: -10px;
 
-    @include mq('md') {
+    @include mq('sm') {
       -webkit-mask-size: 80%;
     }
 
@@ -84,7 +84,7 @@ import Header from '~/components/ui/Header.vue';
   align-items: center;
   max-width: var(--container-max-width-sm);
 
-  @include mq('lg') {
+  @include mq('sm') {
     max-width: var(--container-max-width-md);
     flex-direction: row;
     align-items: flex-start;
@@ -104,7 +104,7 @@ import Header from '~/components/ui/Header.vue';
   margin-bottom: var(--margin-bottom-xl);
   flex-shrink: 0;
 
-  @include mq('md') {
+  @include mq('sm') {
     margin: 0px var(--padding-card);
   }
 }
@@ -149,7 +149,7 @@ import Header from '~/components/ui/Header.vue';
   margin-bottom: var(--margin-bottom-xxl);
   padding: 0 var(--padding-btn-y);
 
-  @include mq('md') {
+  @include mq('sm') {
     font-size: var(--font-size-h2);
   }
 

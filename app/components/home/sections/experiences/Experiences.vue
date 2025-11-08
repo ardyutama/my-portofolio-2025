@@ -10,9 +10,9 @@ import HeadingSection from '~/components/ui/HeadingSection.vue';
     <div class="experiences__container">
       <div class="experiences__content">
         <HeadingSection>Experience</HeadingSection>
-        <div class="experiences__caption">
-          Figma ipsum component variant main layer. Variant rotate layout auto fill arrow. Overflow rectangle thumbnail list distribute pixel underline component editor invite.
-        </div>
+        <h4 class="experiences__description">
+          My professional timeline. Each position was a chance to refine my skills, collaborate with great teams, and build functional, high-performance software.
+        </h4>
         <div class="experiences__card-grid">
           <ExperienceCard imageUrl="/images/ardy-putra-hitachi-photo.png" imageAlt="Hitachi Energy Project"
             companyName="Hitachi Energy" buttonLink="#hitachi-details">
@@ -80,9 +80,12 @@ import HeadingSection from '~/components/ui/HeadingSection.vue';
     max-width: var(--container-max-width-sm);
   }
 
-  &__caption {
+  &__description {
     font-family: var(--font-family-body);
     font-weight: 600;
+    font-size: var(--font-size-btn);
+    letter-spacing: 0.025em;
+    text-align: center;
   }
 
   &__grid {
