@@ -1,0 +1,11 @@
+{
+  "company": "Hitachi Energy",
+  "role": "Software Engineer",
+  "period": "Feb. 2024 – Present",
+  "location": "Bali, Indonesia",
+  "achievements": [
+    "Developed a cross-platform mobile eSOMS Clearance app using JavaScript (Angular JS), SCSS, Webpack, Karma, and Cordova.",
+    "Maintained Asset Suite EAM, resolving client-side UI and performance issues with a 20% contribution to total tickets.",
+    "Maintained Data Fidelity System for Lumada EAM by automating migration validation processes using Vanilla Javascript and Java Spring Boot."
+  ]
+}

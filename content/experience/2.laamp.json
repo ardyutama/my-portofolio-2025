@@ -1,0 +1,11 @@
+{
+  "company": "LAAMP",
+  "role": "Frontend Software Engineer",
+  "period": "Jan. 2024 – Feb. 2024",
+  "location": "Remote",
+  "achievements": [
+    "Collaborated with small teams to implement a major UI redesign of a cross-platform enterprise certification and learning application."
+  ],
+  "keyResults": "Increased assessment completion rates by 20% by improving user experience and application performance.",
+  "stack": ["Javascript (Angular)", "Node JS", "SCSS", "AWS"]
+}
