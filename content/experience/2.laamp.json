@@ -1,11 +1,13 @@
 {
   "company": "LAAMP",
   "role": "Frontend Software Engineer",
-  "period": "Jan. 2024 – Feb. 2024",
+  "period": "Jan 2024 – Feb 2024",
   "location": "Remote",
+  "logo": "/images/logo-laamp.svg", 
+  "colorTheme": "#42b883",
   "achievements": [
-    "Collaborated with small teams to implement a major UI redesign of a cross-platform enterprise certification and learning application."
-  ],
-  "keyResults": "Increased assessment completion rates by 20% by improving user experience and application performance.",
-  "stack": ["Javascript (Angular)", "Node JS", "SCSS", "AWS"]
+    "Collaborated on a major UI redesign of the assessment platform.",
+    "Reduced load times by 45% through bundle optimization.",
+    "Increased assessment completion rates by 20%."
+  ]
 }

@@ -1,96 +1,168 @@
 <script lang="ts" setup>
-import ExperienceCard from './ExperienceCard.vue';
 import HeadingSection from '~/components/ui/HeadingSection.vue';
+import ExperienceCard from './ExperienceCard.vue';
+
+const { data: experiences } = await useAsyncData('experience', () => 
+  queryCollection('experience').all()
+);
 </script>
 
 <template>
   <section class="experiences">
-    <div class="experiences__grid"></div>
-    <div class="experiences__radial-overlay"></div>
+    <div class="experiences__grid-bg"></div>
+    
     <div class="experiences__container">
       <div class="experiences__content">
         <HeadingSection>Experience</HeadingSection>
         <h4 class="experiences__description">
-          My professional timeline. Each position was a chance to refine my skills, collaborate with great teams, and build functional, high-performance software.
+          My professional timeline. Building software, breaking bugs, and learning daily.
         </h4>
-        <div class="experiences__card-grid">
-          <ExperienceCard imageUrl="/images/ardy-putra-hitachi-photo.png" imageAlt="Hitachi Energy Project"
-            companyName="Hitachi Energy" buttonLink="#hitachi-details">
-            <template #logo>
-              <NuxtImg src="/images/logo-hitachi.svg" alt="Hitachi Logo" width="24" height="24" />
-            </template>
-            <template #duration>
-              <span>Feb 2024 - Current <br /> (1 Year X Month)</span>
-            </template>
-          </ExperienceCard>
+
+        <div class="timeline">
+          <div class="timeline__line"></div>
+
+          <div 
+            v-for="(exp, index) in experiences" 
+            :key="exp.company" 
+            class="timeline__item"
+            :class="{ 'timeline__item--left': index % 2 === 0, 'timeline__item--right': index % 2 !== 0 }"
+          >
+            <div class="timeline__dot"></div>
+            
+            <ExperienceCard
+              :company="exp.company"
+              :role="exp.role"
+              :period="exp.period"
+              :location="exp.location"
+              :logo="exp.logo"
+              :color-theme="exp.colorTheme"
+              :bullets="exp.achievements"
+            />
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-
 .experiences {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   position: relative;
-  overflow: hidden;
+  min-height: 100vh;
   background-color: #fff;
+  overflow: hidden;
 
-  &__grid {
+  &__grid-bg {
     position: absolute;
     inset: 0;
+    background-image: 
+      linear-gradient(to right, #e4e4e7 1px, transparent 1px),
+      linear-gradient(to bottom, #e4e4e7 1px, transparent 1px);
+    background-size: 40px 40px;
     z-index: 0;
-    background-image: linear-gradient(to right, #e4e4e7 1px, transparent 1px), linear-gradient(to bottom, #e4e4e7 1px, transparent 1px);
-    background-size: 80px 80px;
-    margin: 0 auto;
-  }
-
-  &__radial-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    mask-image: radial-gradient(ellipse at center, transparent 20%, black);
-    -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, black);
+    opacity: 0.5;
   }
 
   &__container {
-    padding: var(--padding-section-x) var(--padding-section-y);
+    position: relative;
+    z-index: 1;
+    padding: var(--padding-section-y) var(--padding-section-x);
     display: flex;
-    width: 100%;
-    height: 100%;
     justify-content: center;
   }
 
   &__content {
+    width: 100%;
+    max-width: var(--container-max-width-lg);
     display: flex;
     flex-direction: column;
-    height: 100%;
-    position: relative;
     align-items: center;
-    gap: var(--gap-lg);
-    z-index: 20;
-    max-width: var(--container-max-width-sm);
+    gap: var(--gap-xl);
   }
 
   &__description {
-    font-family: var(--font-family-body);
-    font-weight: 600;
-    font-size: var(--font-size-btn);
-    letter-spacing: 0.025em;
     text-align: center;
+    max-width: 600px;
+    margin-bottom: var(--gap-lg);
+    font-weight: 500;
+  }
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px 0;
+
+  &__line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--border-main);
+    border-radius: 4px;
+    
+    left: 30px; 
+
+    @include mq('md') {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
-  &__grid {
-    display: flex;
+  &__item {
+    position: relative;
+    width: 100%;
+    
+    padding-left: 80px; 
+    
+    @include mq('md') {
+      width: 50%;
+      padding-left: 0;
+    }
+  }
 
+  &__dot {
+    position: absolute;
+    top: 24px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-accent);
+    border: 3px solid var(--border-main);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.2);
+    left: 23px;
+
+    @include mq('md') {
+      left: auto; 
+      right: auto;
+    }
+  }
+
+  @include mq('md') {
+    
+    &__item--left {
+      left: 0;
+      padding-right: 60px;
+      text-align: right;
+
+      .timeline__dot {
+        right: -8px; 
+      }
+    }
+
+    &__item--right {
+      left: 50%;
+      padding-left: 60px;
+      
+      .timeline__dot {
+        left: -8px; 
+      }
+    }
   }
 }
 </style>

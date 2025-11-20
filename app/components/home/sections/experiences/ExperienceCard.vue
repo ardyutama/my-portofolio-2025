@@ -1,160 +1,208 @@
 <script lang="ts" setup>
-import { ArrowRight } from '@iconoir/vue';
+import { ArrowRight, ArrowDown } from '@iconoir/vue';
 
-interface ExperienceCardProps {
-  imageUrl: string;
-  imageAlt?: string;
-  imageWidth?: string | number;
-  imageHeight?: string | number;
-
-  companyName: string;
-  buttonLink: string;
-}
-
-withDefaults(defineProps<ExperienceCardProps>(), {
-  imageAlt: 'Experience Image',
-  imageWidth: 400,
-  imageHeight: 700
+const props = defineProps({
+  company: { type: String, required: true },
+  role: { type: String, required: true },
+  period: { type: String, required: true },
+  location: { type: String, default: '' },
+  logo: { type: String, default: '' },
+  bullets: { type: Array as () => string[], default: () => [] },
+  colorTheme: { type: String, default: '#F0DB4F' },
+  image: { type: String, default: '' }
 });
+
+const isOpen = ref(false);
+const toggleOpen = () => {
+  isOpen.value = !isOpen.value;
+};
 </script>
 
 <template>
-  <div class="experience-card">
-    <div class="experience-card__image-wrapper">
-      <NuxtImg :src="imageUrl" :alt="imageAlt" class="experience-card__image" format="webp" :width="imageWidth" :height="imageHeight"
-        preload />
-      <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="experience-card__flower" height="150px"
-          preload />
-    </div>
+  <div class="exp-card" :class="{ 'is-open': isOpen }">
+    
+    <div class="exp-card__header" :style="{ backgroundColor: colorTheme }">
+      <NuxtImg 
+        src="/images/hero-image-flower.svg" 
+        class="exp-card__pattern" 
+        alt=""
+      />
+      
+      <div v-if="image" class="exp-card__photo-wrapper">
+        <NuxtImg :src="image" class="exp-card__photo" alt="Company Photo" />
+      </div>
 
-    <div class="experience-card__content">
-      <div class="experience-card__company-info">
-        <div v-if="$slots.logo" class="experience-card__logo">
-          <slot name="logo" />
-        </div>
-        <div class="experience-card__duration">
-          <slot name="duration"/>
-        </div>
+      <div class="exp-card__logo-badge">
+        <NuxtImg v-if="logo" :src="logo" :alt="company" />
+        <span v-else class="exp-card__logo-text">🏢</span>
       </div>
     </div>
-    <NuxtLink :to="buttonLink" class="experience-card__button">
-        What I've do
-        <ArrowRight class="experience-card__button--icon"/>
-    </NuxtLink>
+
+    <div class="exp-card__body">
+      <h3 class="exp-card__role">{{ role }}</h3>
+      <h4 class="exp-card__company">{{ company }}</h4>
+      <div class="exp-card__meta">
+        <span class="exp-card__period">{{ period }}</span>
+        <span class="exp-card__location" v-if="location">• {{ location }}</span>
+      </div>
+    </div>
+
+    <button class="exp-card__toggle-btn" @click="toggleOpen">
+      <span v-if="!isOpen">What I've done</span>
+      <span v-else>Close Details</span>
+      <component :is="isOpen ? ArrowDown : ArrowRight" stroke-width="2" width="18" />
+    </button>
+
+    <div class="exp-card__details" :style="{ maxHeight: isOpen ? '500px' : '0px' }">
+      <div class="exp-card__details-inner">
+        <ul>
+          <li v-for="(item, index) in bullets" :key="index">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </template>
 
-
-
 <style lang="scss" scoped>
-
-$token-hitachi-red: #FC2403;
-
-.experience-card {
-  @include shadow-card(4px);
+.exp-card {
+  position: relative;
   width: 100%;
-  width: 240px;
-  background-color: var(--bg-card);
+  background: var(--bg-main);
   border: 3px solid var(--border-main);
-  overflow: hidden;
+  box-shadow: 6px 6px 0px 0px var(--border-main);
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease;
 
-  @include mq('md') {
-    width: 280px;
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px 0px var(--border-main);
   }
 
-  &__image-wrapper {
+  &__header {
     position: relative;
-    width: 100%;
-    padding-top: 62.5%;
-    background-color: var(--bg-accent);
+    height: 140px;
     overflow: hidden;
+    border-bottom: 3px solid var(--border-main);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &__image {
+  &__pattern {
     position: absolute;
-    transform: scale(0.5) translate(40px, 70px);
+    width: 120%;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &__photo-wrapper {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: multiply;
+  }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    filter: grayscale(100%);
+  }
+
+  &__logo-badge {
+    position: relative;
     z-index: 2;
-
-    @include mq('md') {
-       transform: scale(0.6) translate(40px, 70px);
-    }
-  }
-
-  &__flower {
-    position: absolute;
-    transform: scale(1.3) translate(0%, -50%);
-
-    z-index: 1;
-  }
-
-  &__content {
-    padding: var(--gap-md);
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-md);
-    flex-grow: 1;
-    justify-content: space-between;
-    border-top: 3px solid var(--border-main);
-  }
-
-  &__company-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--gap-xs);
-  }
-
-  &__logo {
+    background: var(--bg-main);
+    border: 2px solid var(--border-main);
+    padding: 8px 16px;
+    border-radius: 50px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 24px; 
+    box-shadow: 0px 4px 0px 0px rgba(0,0,0,0.2);
 
-    :deep(img) {
-      height: 100%;
+    img {
+      height: 20px;
       width: auto;
     }
   }
 
-  &__company-name {
+  &__body {
+    padding: var(--gap-md);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__role {
+    font-family: var(--font-family-heading);
     font-size: var(--font-size-md);
-    font-family: var(--font-family-heading);
-    color: var(--text-main);
-    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
   }
 
-  &__duration {
-    font-family: var(--font-family-heading);
+  &__company {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--text-main);
-    margin: 0;
+    color: var(--text-primary);
   }
 
-  &__button {
-    display: inline-flex;
+  &__meta {
+    margin-top: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--text-main);
+    opacity: 0.7;
+    font-weight: 500;
+  }
+
+  &__toggle-btn {
+    width: 100%;
+    padding: 12px;
+    background: #FF4B4B;
+    color: white;
+    border: none;
+    border-top: 3px solid var(--border-main);
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--gap-xs);
-    padding: var(--padding-btn-y) var(--padding-btn-x);
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-btn);
-    font-weight: 600;
+    gap: 8px;
     cursor: pointer;
-    width: 100%;
-    border-top: 3px solid var(--border-main);
-    background-color: $token-hitachi-red;
-    color: var(--text-light);
+    transition: background 0.2s;
 
-    &--icon {
-      height: 18px;
-      width: 18px;
+    &:hover {
+      background: darken(#FF4B4B, 10%);
+    }
+  }
+
+  &__details {
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: var(--bg-white-light);
+  }
+
+  &__details-inner {
+    padding: var(--gap-md);
+    border-top: 2px dashed var(--border-main);
+    
+    ul {
+      padding-left: 20px;
+      list-style-type: square;
+      text-align: start;
+    }
+
+    li {
+      font-size: var(--font-size-xs);
+      margin-bottom: 8px;
+      line-height: 1.5;
     }
   }
 }
