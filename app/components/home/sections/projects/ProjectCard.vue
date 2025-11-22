@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { GithubCircle, ArrowUpRightSquare } from '@iconoir/vue';
-import TechTag from './TechTag.vue'; // Import the new component
+import TechTag from './TechTag.vue';
 
 defineProps({
   title: {
@@ -82,7 +82,7 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-$image-placeholder-height-phone: 200px; // Slightly taller for better visual balance
+$image-placeholder-height-phone: 200px; 
 
 .project-card {
   width: 100%;
@@ -93,14 +93,11 @@ $image-placeholder-height-phone: 200px; // Slightly taller for better visual bal
   background-color: var(--bg-main);
   overflow: hidden;
 
-  // Use your mixin
   @include shadow-card; 
   
-  // Add a hover effect to the whole card for that "tactile" feel
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   &:hover {
     transform: translateY(-4px);
-    // Assuming you have a variable for a deeper shadow, or manually:
     box-shadow: 8px 8px 0px 0px rgba(0,0,0,1); 
   }
 

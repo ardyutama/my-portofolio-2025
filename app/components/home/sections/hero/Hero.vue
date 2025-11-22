@@ -6,7 +6,12 @@ import Header from '~/components/ui/Header.vue';
 
 <template>
   <section class="hero" ref="heroSectionRef">
+    <div class="hero__bg">
+      <div class="hero__bg-dots"></div>
+      <div class="hero__bg-mask"></div>
+    </div>
     <Header />
+    
     <div class="hero__content">
       <div class="hero__image-card">
         <div class="hero__photo-container">
@@ -44,7 +49,6 @@ import Header from '~/components/ui/Header.vue';
 </template>
 
 <style lang="scss" scoped>
-
 .hero {
   display: flex;
   flex-direction: column;
@@ -56,29 +60,51 @@ import Header from '~/components/ui/Header.vue';
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-color: rgb(from var(--bg-primary) r g b / 10%);
-    mask-image: url('/images/wavy-grid-bg.svg');
-    mask-position: center top;
-    mask-repeat: no-repeat;
-    top: -10px;
+.hero__bg {
+  position: absolute;
+  inset: 0; 
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
 
-    @include mq('sm') {
-      -webkit-mask-size: 80%;
-    }
+.hero__bg-dots {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-size: 20px 20px;
+  
+  background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
 
-    @include mq('lg') {
-      -webkit-mask-size: 50%;
-    }
+  :global(.dark) & {
+    background-image: radial-gradient(#404040 1px, transparent 1px);
   }
 }
 
+.hero__bg-mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: white;
+  
+  :global(.dark) & {
+    background-color: black;
+  }
+
+  mask-image: radial-gradient(ellipse at center, transparent 20%, black);
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, black);
+}
+
 .hero__content {
+  position: relative;
+  z-index: 1; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,6 +155,8 @@ import Header from '~/components/ui/Header.vue';
 }
 
 .hero__actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
