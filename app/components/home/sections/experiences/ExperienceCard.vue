@@ -67,6 +67,8 @@ const toggleOpen = () => {
 </template>
 
 <style lang="scss" scoped>
+@use 'sass:color';
+
 .exp-card {
   position: relative;
   width: 100%;
@@ -179,7 +181,7 @@ const toggleOpen = () => {
     transition: background 0.2s;
 
     &:hover {
-      background: darken(#FF4B4B, 10%);
+      background: color.adjust(#FF4B4B, $lightness: -10%);
     }
   }
 
