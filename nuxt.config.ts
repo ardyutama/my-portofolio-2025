@@ -15,6 +15,10 @@ export default defineNuxtConfig({
   css: [
     '~/assets/scss/main.scss'
   ],
+  ssr: true,
+  nitro: {
+    preset: 'static',
+  },
   vite: {
     css: {
       preprocessorOptions: {

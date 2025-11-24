@@ -38,10 +38,6 @@ defineProps({
         :src="thumbnail"
         :alt="title"
         class="project-card__image"
-        format="webp"
-        provider="ipx"
-        width="400"
-        height="250"
         fit="cover"
       />
     </div>
@@ -113,11 +109,9 @@ $image-placeholder-height-phone: 200px;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // Subtle zoom on hover
     transition: transform 0.5s ease;
   }
   
-  // Zoom image when card is hovered
   &:hover &__image {
     transform: scale(1.05);
   }
@@ -128,7 +122,6 @@ $image-placeholder-height-phone: 200px;
     justify-content: space-between;
     height: 100%;
     
-    // Ensure content takes remaining space
     flex: 1; 
   }
 

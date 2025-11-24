@@ -2,8 +2,9 @@
 import HeadingSection from '~/components/ui/HeadingSection.vue';
 import ExperienceCard from './ExperienceCard.vue';
 
-const { data: experiences } = await useAsyncData('experience', () => 
-  queryCollection('experience').all()
+const { data: experiences } = await useAsyncData('experience', () => {
+    return queryCollection('experience').all()
+  }
 );
 </script>
 
