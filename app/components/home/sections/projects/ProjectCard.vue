@@ -38,6 +38,8 @@ defineProps({
         :src="thumbnail"
         :alt="title"
         class="project-card__image"
+        format="webp"
+        quality="80"
         fit="cover"
       />
     </div>
