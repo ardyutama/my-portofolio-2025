@@ -3,76 +3,50 @@ import { GithubCircle, ArrowUpRightSquare } from '@iconoir/vue';
 import TechTag from './TechTag.vue';
 
 defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  tagline: {
-    type: String,
-    default: '',
-  },
-  thumbnail: {
-    type: String,
-    default: '',
-  },
-  tags: {
-    type: Array as () => string[],
-    default: () => [],
-  },
-  githubLink: {
-    type: String,
-    default: '#',
-  },
-  liveLink: {
-    type: String,
-    default: '#',
-  }
+  title: { type: String, required: true },
+  tagline: { type: String, default: '' },
+  thumbnail: { type: String, default: '' },
+  tags: { type: Array as () => string[], default: () => [] },
+  githubLink: { type: String, default: '#' },
+  liveLink: { type: String, default: '#' }
 });
 </script>
 
 <template>
   <div class="project-card">
-    <div class="project-card__image-container">
-      <NuxtImg
-        v-if="thumbnail"
-        :src="thumbnail"
-        :alt="title"
-        class="project-card__image"
-        format="webp"
-        quality="80"
-        fit="cover"
-      />
+    <div class="project-card__visuals">
+      <div class="browser-frame">
+        <div class="browser-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="image-wrapper">
+          <NuxtImg v-if="thumbnail" :src="thumbnail" :alt="title" class="project-image" format="webp" quality="80"
+            fit="cover" />
+        </div>
+      </div>
     </div>
-    
-    <div class="project-card__content-container">
+
+    <div class="project-card__body-wrapper">
       <div class="project-card__content">
-        <div class="project-card__title-container">
-          <h3 class="project-card__title">
-            {{ title }}
-          </h3>
-          
-          <div class="project-card__tag-container" v-if="tags.length">
-            <div class="project-card__tag-grid">
-              <TechTag 
-                v-for="tag in tags" 
-                :key="tag" 
-                :label="tag" 
-              />
-            </div>
+        <div class="project-card__header">
+          <h3 class="project-card__title">{{ title }}</h3>
+          <div class="project-card__tags" v-if="tags.length">
+            <TechTag v-for="tag in tags" :key="tag" :label="tag" />
           </div>
         </div>
-        
-        <p class="project-card__description">
-          {{ tagline }}
-        </p>
+        <p class="project-card__description">{{ tagline }}</p>
       </div>
 
-      <div class="project-card__action-footer">
-        <NuxtLink :to="githubLink" target="_blank" class="project-card__action-github">
-          Source Code <GithubCircle stroke-width="1.5"/>
+      <div class="project-card__actions">
+        <NuxtLink :to="githubLink" target="_blank" class="action-btn github">
+          <span>Source Code</span>
+          <GithubCircle stroke-width="1.5" />
         </NuxtLink>
-        <NuxtLink :to="liveLink" target="_blank" class="project-card__action-live">
-          Live Website <ArrowUpRightSquare stroke-width="1.5"/>
+        <NuxtLink :to="liveLink" target="_blank" class="action-btn live">
+          <span>Live Website</span>
+          <ArrowUpRightSquare stroke-width="1.5" />
         </NuxtLink>
       </div>
     </div>
@@ -80,72 +54,129 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-$image-placeholder-height-phone: 200px; 
+$local-mac-red: #FF5F56;
+$local-mac-yellow: #FFBD2E;
+$local-mac-green: #27C93F;
+$local-frame-height: 200px;
+$local-frame-radius: 6px;
+$border-value: 3px solid var(--border-main);
 
 .project-card {
   width: 100%;
-  border: 2px solid var(--border-main);
-  position: relative;
+  background-color: var(--bg-main);
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-main);
+  border: $border-value;
   overflow: hidden;
 
-  @include shadow-card; 
-  
+  @include shadow-card;
+
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 8px 8px 0px 0px rgba(0,0,0,1); 
+    box-shadow: 8px 8px 0px 0px var(--border-main);
+
+    .browser-frame {
+      transform: translateY(-2px);
+    }
+
+    .project-image {
+      transform: scale(1.03);
+    }
   }
 
-  &__image-container {
-    height: $image-placeholder-height-phone;
-    border-bottom: 2px solid var(--border-main);
-    background-color: rgba($color: $token-green, $alpha: 0.1);
+  &__visuals {
+    background-color: var(--bg-white-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .browser-frame {
     width: 100%;
+    height: $local-frame-height;
+    background: var(--bg-main);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+
+  .browser-header {
+    height: 24px;
+    background-color: var(--bg-white-light);
+    display: flex;
+    align-items: center;
+    border-bottom: $border-value;
+    gap: var(--gap-xs);
+    padding-left: 10px;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid var(--border-main);
+
+      &.red {
+        background-color: $local-mac-red;
+      }
+
+      &.yellow {
+        background-color: $local-mac-yellow;
+      }
+
+      &.green {
+        background-color: $local-mac-green;
+      }
+    }
+  }
+
+  .image-wrapper {
+    flex: 1;
+    position: relative;
     overflow: hidden;
   }
 
-  &__image {
+  .project-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     transition: transform 0.5s ease;
   }
-  
-  &:hover &__image {
-    transform: scale(1.05);
-  }
 
-  &__content-container {
+  &__body-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    
-    flex: 1; 
+    flex: 1;
   }
 
   &__content {
+    padding: $space-md;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    border-bottom: 2px solid var(--border-main);
-    padding: $space-md;
-    flex-grow: 1; 
-    gap: $space-sm;
+    gap: var(--gap-sm);
+    border-top: $border-value;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
   }
 
   &__title {
-    margin-bottom: $space-xs;
     font-family: var(--font-family-heading);
-    font-size: 1.25rem;
+    font-size: $font-size-lg;
+    font-weight: 700;
   }
 
-  &__tag-grid {
+  &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: $space-xs; // Increased gap slightly for the hard shadows
+    gap: var(--gap-xs);
   }
 
   &__description {
@@ -154,51 +185,41 @@ $image-placeholder-height-phone: 200px;
     color: var(--text-main);
   }
 
-  &__action-footer {
-    width: 100%;
-    height: 56px;
+  &__actions {
     display: flex;
+    border-top: $border-value;
+  }
+
+  .action-btn {
+    flex: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding: $space-sm;
     font-family: var(--font-family-heading);
     font-weight: 700;
-    flex-shrink: 0; 
-    
-    a {
-      width: 100%;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      color: $token-white;
-      gap: $space-xxs;
-      padding: $space-xs;
-      font-size: $font-size-xs;
-      text-decoration: none; // Remove underline
-      border: none;
-      border-right: 2px solid var(--border-main); // Thicker border for brutalism
-      transition: background-color 0.2s ease;
+    text-decoration: none;
+    transition: filter 0.2s ease;
 
-      @include mq('sm') {
-        font-size: $font-size-base;
-      }
-      
-      &:last-child {
-        border-right: none;
-      }
-
-      // Hover states for buttons
-      &:hover {
-        filter: brightness(1.1); // Simple hover effect
-      }
+    &:hover {
+      filter: brightness(1.1);
     }
-  }
 
-  &__action-github {
-    background-color: $token-gray-dark;
-    color: $token-white;
-  }
+    &.github {
+      background-color: $token-gray-dark;
+      color: $token-white;
+      border-right: $border-value;
+    }
 
-  &__action-live {
-    background-color: $token-green;
-    color: #000;
+    &.live {
+      background-color: $token-green;
+      color: var(--text-main);
+    }
+
+    span {
+      font-size: $font-size-sm;
+    }
   }
 }
 </style>
