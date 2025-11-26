@@ -1,0 +1,28 @@
+{
+  "name": "portofolio-2025",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "tree": "treee -l 4 --ignore \"node_modules/, vendor/, storage/\" --link"
+  },
+  "dependencies": {
+    "@iconoir/vue": "^7.11.0",
+    "@nuxt/content": "^3.8.0",
+    "@nuxt/image": "^1.11.0",
+    "@nuxtjs/google-fonts": "3.2.0",
+    "animejs": "^4.2.2",
+    "better-sqlite3": "^12.4.1",
+    "nuxt": "^4.2.0",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "sass": "^1.93.2",
+    "tree-cli": "^0.6.7"
+  }
+}

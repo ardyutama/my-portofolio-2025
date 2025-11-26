@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use 'tokens' as *;
+
+@mixin mq($key) {
+  $size: map.get($breakpoints, $key);
+
+  @if ($size) {
+    @media (min-width: $size) {
+      @content;
+    }
+  } @else {
+    @error 'Breakpoint key `#{$key}` not found in $breakpoints map.';
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin shadow-card($offset: 4px) {
+  box-shadow: $offset $offset 0 0 var(--border-main);
+}
+
+@mixin shadow-button($offset: 6px, $hover-offset: 2px) {
+  box-shadow: 0 $offset 0 0 var(--border-main);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 $hover-offset 0 0 var(--border-main);
+    transform: translateY(calc($offset - $hover-offset));
+  }
+}

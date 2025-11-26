@@ -1,0 +1,66 @@
+@use 'tokens' as *;
+@use 'mixins';
+
+:root {
+  --bg-main: #{$token-white};
+  --bg-accent: #{$token-yellow};
+  --bg-primary: #{$token-blue};
+  --bg-card: #{$token-white};
+  --bg-white-light: #{$token-gray-light};
+  --bg-orange: #{$token-orange};
+
+  --text-main: #{$token-black};
+  --text-light: #{$token-white};
+  --text-primary: #{$token-blue};
+
+  --border-main: #{$token-black};
+  --border-radius-pill: 50px;
+  --border-radius-card: 16px; 
+
+  --gap-xs: #{$space-xs};
+  --gap-sm: #{$space-sm};
+  --gap-md: #{$space-md};
+  --gap-lg: #{$space-lg};
+  --gap-xl: #{$space-xl};
+
+  --padding-btn-y: #{$space-sm};
+  --padding-btn-x: #{$space-lg};
+  --padding-card: #{$space-lg};
+  --padding-section-x: #{$space-lg};
+  --padding-section-y: #{$space-xxxl};
+  --padding-section-heading-y: #{$space-xs};
+
+  --margin-bottom-md: #{$space-md};
+  --margin-bottom-lg: #{$space-lg};
+  --margin-bottom-xl: #{$space-xl};
+  --margin-bottom-xxl: #{$space-xxl};
+
+  --container-max-width-sm: #{$breakpoint-sm};
+  --container-max-width-md: #{$breakpoint-md};
+  --container-max-width-lg: #{$breakpoint-lg};
+  --container-max-width-xl: #{$breakpoint-xl};
+
+  --font-family-heading: #{$font-family-heading};
+  --font-family-body: #{$font-family-body};
+
+  --font-size-body: #{$font-size-sm};
+  --font-size-small: #{$font-size-sm};
+  --font-size-btn: #{$font-size-sm};
+  --font-size-nav: #{$font-size-md};
+  
+  --font-size-h3: #{$font-size-xl};
+  --font-size-h2: #{$font-size-xxl};
+  --font-size-h1: #{$font-size-xxxl};
+}
+
+@include mixins.mq('md') {
+  :root {
+    --font-size-body: #{$font-size-md};
+    --font-size-btn: #{$font-size-md};
+    --font-size-nav: #{$font-size-md};
+    
+    --font-size-h3: #{$font-size-xxl};
+    --font-size-h2: #{$font-size-xxxl};
+    --font-size-h1: #{$font-size-mega};
+  }
+}
