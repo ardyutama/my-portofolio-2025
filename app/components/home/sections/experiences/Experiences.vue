@@ -36,7 +36,6 @@ const { data: experiences } = await useAsyncData('experience', () => {
               :period="exp.period"
               :location="exp.location"
               :logo="exp.logo"
-              :color-theme="exp.colorTheme"
               :bullets="exp.achievements"
             />
           </div>

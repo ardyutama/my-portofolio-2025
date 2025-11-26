@@ -21,7 +21,8 @@ const { data: projects } = await useAsyncData('projects', () => {
         
         <div class="projects__grid">
           <ProjectCard 
-            v-for="project in projects"
+            v-for="(project, index) in projects"
+            :key="index"
             :title="project.title"
             :tagline="project.tagline"
             :thumbnail="project.thumbnail"

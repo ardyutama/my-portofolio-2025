@@ -25,8 +25,8 @@ export default defineContentConfig({
         period: z.string(),
         location: z.string(),
         achievements: z.array(z.string()),
+        logo: z.string().optional(),
         stack: z.array(z.string()).optional(),
-        keyResults: z.string().optional()
       })
     })
   }

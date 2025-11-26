@@ -91,12 +91,7 @@ import Header from '~/components/ui/Header.vue';
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  background-color: white;
-  
-  :global(.dark) & {
-    background-color: black;
-  }
+  background-color: var(--bg-main);
 
   mask-image: radial-gradient(ellipse at center, transparent 20%, black);
   -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, black);

@@ -3,6 +3,8 @@
   "role": "Software Engineer",
   "period": "Feb. 2024 – Present",
   "location": "Bali, Indonesia",
+  "logo": "/images/logo-hitachi.svg", 
+  "stack": [""],
   "achievements": [
     "Developed a cross-platform mobile eSOMS Clearance app using JavaScript (Angular JS), SCSS, Webpack, Karma, and Cordova.",
     "Maintained Asset Suite EAM, resolving client-side UI and performance issues with a 20% contribution to total tickets.",

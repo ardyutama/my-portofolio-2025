@@ -13,15 +13,11 @@ const tagThemes: Record<string, string> = {
   'angular': '#FF5555',
   'svelte': '#FF3E00',
   'next': '#FFFFFF',
-  'inertia': '#9553E9',
   'inertia.js': '#9553E9',
   
-  'tailwind': '#38B2AC', 
   'tailwindcss': '#38B2AC',
   'sass': '#CC6699',
   'scss': '#CC6699',
-  'anime': '#FF4B4B',
-  'anime.js': '#FF4B4B',
   
   'typescript': '#3178C6',
   'javascript': '#F7DF1E',
@@ -42,7 +38,7 @@ const tagThemes: Record<string, string> = {
   'firebase': '#FFCA28',
   'supabase': '#3ECF8E',
 
-  'big': '#9B59B6',
+  'big data': '#9B59B6',
   'figma': '#F24E1E',
   'spotify': '#1DB954',
   'oauth': '#4285F4',
@@ -53,11 +49,7 @@ const tagThemes: Record<string, string> = {
 
 const getTagColor = (originalLabel: string) => {
   const lower = originalLabel.toLowerCase();
-  
   if (tagThemes[lower]) return tagThemes[lower];
-
-  const firstWord = lower.split(' ')[0];
-  if (tagThemes[firstWord]) return tagThemes[firstWord];
   
   return '#E0E0E0'; 
 };
