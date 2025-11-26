@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   css: [
     '~/assets/scss/main.scss'
   ],
-  ssr: true,
+  ssr: false,
   nitro: {
     prerender: {
       crawlLinks: true
