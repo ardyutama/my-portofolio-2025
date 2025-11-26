@@ -82,10 +82,12 @@ const { data: experiences } = await useAsyncData('experience', () => {
   }
 
   &__description {
+    font-size: var(--font-size-btn);
+    font-weight: 600;
+    letter-spacing: 0.025em;
     text-align: center;
-    max-width: 600px;
-    margin-bottom: var(--gap-lg);
-    font-weight: 500;
+    max-width: var(--container-max-width-sm);
+    color: var(--text-secondary);
   }
 }
 

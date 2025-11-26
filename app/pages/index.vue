@@ -13,6 +13,11 @@
 <script lang="ts" setup>
   import { IconoirProvider } from '@iconoir/vue';
   import Home from '~/components/home/index.vue'
+
+  useHead({
+    title: 'Portofolio - Ardy Putra Utama',
+    link: [{rel: 'icon', type: 'svg', href: '/ardy-putra-logo.svg'}]
+  })
 </script>
 
 <style lang="scss" scoped>

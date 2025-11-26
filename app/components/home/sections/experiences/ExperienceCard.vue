@@ -43,7 +43,7 @@ const toggleOpen = () => {
       <h4 class="exp-card__company">{{ company }}</h4>
       <div class="exp-card__meta">
         <span class="exp-card__period">{{ period }}</span>
-        <span class="exp-card__location" v-if="location">• {{ location }}</span>
+        <span class="exp-card__location" v-if="location"> | {{ location }}</span>
       </div>
     </div>
 
@@ -96,7 +96,7 @@ const toggleOpen = () => {
 
   &__pattern {
     position: absolute;
-    width: 120%;
+    width: 80%;
     opacity: 0.5;
     pointer-events: none;
   }
@@ -152,7 +152,6 @@ const toggleOpen = () => {
     font-family: var(--font-family-body);
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--text-primary);
   }
 
   &__meta {
@@ -160,7 +159,6 @@ const toggleOpen = () => {
     font-size: var(--font-size-xs);
     color: var(--text-main);
     opacity: 0.7;
-    font-weight: 500;
   }
 
   &__toggle-btn {

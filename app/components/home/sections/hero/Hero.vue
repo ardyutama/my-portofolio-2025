@@ -79,10 +79,6 @@ import Header from '~/components/ui/Header.vue';
   background-size: 20px 20px;
   
   background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
-
-  :global(.dark) & {
-    background-image: radial-gradient(#404040 1px, transparent 1px);
-  }
 }
 
 .hero__bg-mask {

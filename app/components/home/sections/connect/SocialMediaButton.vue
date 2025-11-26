@@ -40,6 +40,8 @@ $padding-social-media-card: 12px;
   background-color: $token-white;
   color: $token-black;
 
+  transition: transform 0.2s ease;
+  
   &__icon {
     display: flex;
   }
@@ -47,6 +49,11 @@ $padding-social-media-card: 12px;
   &__text {
     font-family: var(--font-family-heading);
     font-weight: 600;
+  }
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px 0px var(--border-main);
   }
 }
 </style>

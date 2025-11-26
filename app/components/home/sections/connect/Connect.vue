@@ -12,19 +12,19 @@ import ConnectMarquee from './ConnectMarquee.vue';
       <div class="connect__container">
         <div class="connect__content">
           <h2 class="connect__heading">Just want to be fwiends :)</h2>
-          <SocialMediaButton to="#">
+          <SocialMediaButton to="https://www.instagram.com/ardy_putrautama">
             <template #icon>
               <Instagram />
             </template>
             Follow my IG
           </SocialMediaButton>
-          <SocialMediaButton to="#">
+          <SocialMediaButton to="https://www.linkedin.com/in/ardy-putra-utama/">
             <template #icon>
               <Linkedin />
             </template>
             Connect my LinkedIn
           </SocialMediaButton>
-          <SocialMediaButton to="#">
+          <SocialMediaButton to="https://github.com/ardyutama">
             <template #icon>
               <GithubCircle />
             </template>
@@ -36,12 +36,12 @@ import ConnectMarquee from './ConnectMarquee.vue';
             </template>
             Say Hello to my Email
           </SocialMediaButton>
-          <div class="connect__copyright-footer">
+        </div>
+      </div>
+      <div class="connect__copyright-footer">
             <Copyright />
             <h4>2025 Ardy Putra Utama</h4>
           </div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
@@ -98,7 +98,10 @@ $background-black-shadow: rgb(from var(--text-main) r g b / 10%);
   }
 
   &__copyright-footer {
+    padding: 16px;
     display: inline-flex;
+    justify-content: center;
+    background-color: var(--bg-orange);
     align-items: center;
     color: $token-white;
     gap: $space-xs;
