@@ -2,6 +2,143 @@
 import HeroButton from './HeroButton.vue';
 import { Suitcase } from '@iconoir/vue';
 import Header from '~/components/ui/Header.vue';
+
+const { $animate, $stagger, $Timeline, $animeUtils } = useNuxtApp();
+const heroSectionRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  if (!heroSectionRef.value || !$animate) return;
+
+  // Check if mobile or desktop
+  const isMobile = window.innerWidth < 640; // 640px is 'sm' breakpoint
+
+  // Split headline text into words for stagger animation
+  const headlineEl = heroSectionRef.value.querySelector('.hero__headline');
+  if (headlineEl) {
+    const text = headlineEl.textContent || '';
+    const words = text.split(' ');
+    
+    // Preserve the HTML structure with spans but split text into words
+    headlineEl.innerHTML = words.map((word, index) => {
+      // Check if word contains highlight class content
+      if (word === 'Ardy' || word === 'Putra,') {
+        return `<span class="hero__word hero__highlight">${word}</span>`;
+      } else if (word === 'website' || word === '&' || word === 'applications') {
+        return `<span class="hero__word hero__highlight">${word}</span>`;
+      }
+      return `<span class="hero__word">${word}</span>`;
+    }).join(' ');
+  }
+
+  // Set initial states
+  $animeUtils.set('.hero__bg-dots', {
+    opacity: 0
+  });
+
+  $animeUtils.set('.hero__word', {
+    opacity: 0,
+    translateY: 20
+  });
+
+  // Set initial state for image card based on screen size
+  if (isMobile) {
+    $animeUtils.set('.hero__image-card', {
+      opacity: 0,
+      translateY: 100
+    });
+  } else {
+    $animeUtils.set('.hero__image-card', {
+      opacity: 0,
+      translateX: 100
+    });
+  }
+
+  $animeUtils.set('.hero__flower', {
+    opacity: 0,
+    scale: 0.5,
+    rotate: -20
+  });
+
+  $animeUtils.set('.hero__actions', {
+    opacity: 0,
+    translateY: 30
+  });
+
+  // Create timeline for the sequence
+  const heroTimeline = new $Timeline();
+
+  // 1. First: Show background dots
+  heroTimeline.add('.hero__bg-dots', {
+    opacity: [0, 1],
+    duration: 800,
+    ease: 'out(3)'
+  })
+  // 2. Then: Show headline text with stagger delay per word
+  .add('.hero__word', {
+    opacity: [0, 1],
+    translateY: [20, 0],
+    duration: 600,
+    ease: 'out(3)',
+    delay: $stagger(80)
+  }, '+=200')
+  // 3. Then: Show photo container (direction based on screen size)
+  .add('.hero__image-card', 
+    isMobile ? {
+      opacity: [0, 1],
+      translateY: [100, 0],
+      duration: 1000,
+      ease: 'out(4)'
+    } : {
+      opacity: [0, 1],
+      translateX: [100, 0],
+      duration: 1000,
+      ease: 'out(4)'
+    }, 
+  '+=400')
+  // 4. Finally: Show flower
+  .add('.hero__flower', {
+    opacity: [0, 1],
+    scale: [0.5, 1],
+    rotate: [-20, 0],
+    duration: 800,
+    ease: 'outElastic(1, .8)'
+  }, '-=600')
+  // 5. Show action buttons last
+  .add('.hero__actions', {
+    opacity: [0, 1],
+    translateY: [30, 0],
+    duration: 700,
+    ease: 'out(3)'
+  }, '-=400')
+  // 6. After timeline ends, animate highlight words to blue color
+  .add('.hero__highlight', {
+    color: ['var(--text-primary)'],
+    duration: 800,
+    ease: 'out(3)',
+    delay: $stagger(150)
+  }, '+=300');
+
+  // Add continuous subtle animations after entrance
+  setTimeout(() => {
+    // Subtle floating animation to image card
+    $animate('.hero__image-card', {
+      translateY: [-5, 5],
+      duration: 3000,
+      alternate: true,
+      loop: true,
+      ease: 'inOut'
+    });
+
+    // Gentle rotation to flower
+    $animate('.hero__flower', {
+      rotate: [-5, 5],
+      duration: 4000,
+      alternate: true,
+      loop: true,
+      ease: 'inOut(2)'
+    });
+  }, 3500);
+});
 </script>
 
 <template>
@@ -22,9 +159,9 @@ import Header from '~/components/ui/Header.vue';
           preload />
       </div>
       <h1 class="hero__headline">
-        I'm <span class="hero__highlight">Ardy Putra</span>, I'm a
+        I'm Ardy Putra, I'm a
         software engineer focused on
-        <span class="hero__highlight">website & applications</span>
+        website & applications
       </h1>
     </div>
     <div class="hero__actions">
@@ -36,7 +173,7 @@ import Header from '~/components/ui/Header.vue';
       </HeroButton>
 
       <div class="hero__actions-secondary">
-        <HeroButton to="#contact" variant="outline">
+        <HeroButton to="#connect" variant="outline">
           Get in Touch
         </HeroButton>
 
@@ -60,6 +197,7 @@ import Header from '~/components/ui/Header.vue';
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  scroll-snap-align: start;
 }
 
 .hero__bg {
@@ -175,6 +313,11 @@ import Header from '~/components/ui/Header.vue';
   @include mq('lg') {
     font-size: var(--font-size-h1);
   }
+}
+
+.hero__word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .hero__highlight {
