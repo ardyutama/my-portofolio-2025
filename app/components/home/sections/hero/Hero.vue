@@ -173,7 +173,7 @@ onMounted(() => {
       </HeroButton>
 
       <div class="hero__actions-secondary">
-        <HeroButton to="#contact" variant="outline">
+        <HeroButton to="#connect" variant="outline">
           Get in Touch
         </HeroButton>
 
@@ -197,6 +197,7 @@ onMounted(() => {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  scroll-snap-align: start;
 }
 
 .hero__bg {
