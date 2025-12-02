@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const { $animate } = useNuxtApp();
+const buttonRef = ref<HTMLElement | null>(null);
+
 defineProps({
   to: {
     type: String,
@@ -9,10 +12,56 @@ defineProps({
     default: 'primary',
   },
 });
+
+const handleMouseEnter = () => {
+  if (!buttonRef.value || !$animate) return;
+  
+  $animate(buttonRef.value, {
+    scale: 1.05,
+    duration: 300,
+    ease: 'out(2)'
+  });
+
+  // Animate icon if present
+  const icon = buttonRef.value.querySelector('.btn__icon');
+  if (icon) {
+    $animate(icon, {
+      translateX: [0, 5],
+      duration: 300,
+      ease: 'out(2)'
+    });
+  }
+};
+
+const handleMouseLeave = () => {
+  if (!buttonRef.value || !$animate) return;
+  
+  $animate(buttonRef.value, {
+    scale: 1,
+    duration: 300,
+    ease: 'out(2)'
+  });
+
+  const icon = buttonRef.value.querySelector('.btn__icon');
+  if (icon) {
+    $animate(icon, {
+      translateX: 0,
+      duration: 300,
+      ease: 'out(2)'
+    });
+  }
+};
 </script>
 
 <template>
-  <NuxtLink :to="to" class="btn" :class="`btn--${variant}`">
+  <NuxtLink 
+    :to="to" 
+    class="btn" 
+    :class="`btn--${variant}`"
+    ref="buttonRef"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+  >
     <span class="btn__text">
       <slot />
     </span>
