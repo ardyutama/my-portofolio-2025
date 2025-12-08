@@ -9,18 +9,14 @@ const heroSectionRef = ref<HTMLElement | null>(null);
 onMounted(() => {
   if (!heroSectionRef.value || !$animate) return;
 
-  // Check if mobile or desktop
-  const isMobile = window.innerWidth < 640; // 640px is 'sm' breakpoint
+  const isMobile = window.innerWidth < 640;
 
-  // Split headline text into words for stagger animation
   const headlineEl = heroSectionRef.value.querySelector('.hero__headline');
   if (headlineEl) {
     const text = headlineEl.textContent || '';
     const words = text.split(' ');
     
-    // Preserve the HTML structure with spans but split text into words
     headlineEl.innerHTML = words.map((word, index) => {
-      // Check if word contains highlight class content
       if (word === 'Ardy' || word === 'Putra,') {
         return `<span class="hero__word hero__highlight">${word}</span>`;
       } else if (word === 'website' || word === '&' || word === 'applications') {
@@ -30,7 +26,6 @@ onMounted(() => {
     }).join(' ');
   }
 
-  // Set initial states
   $animeUtils.set('.hero__bg-dots', {
     opacity: 0
   });
@@ -40,7 +35,6 @@ onMounted(() => {
     translateY: 20
   });
 
-  // Set initial state for image card based on screen size
   if (isMobile) {
     $animeUtils.set('.hero__image-card', {
       opacity: 0,
@@ -64,16 +58,13 @@ onMounted(() => {
     translateY: 30
   });
 
-  // Create timeline for the sequence
   const heroTimeline = new $Timeline();
 
-  // 1. First: Show background dots
   heroTimeline.add('.hero__bg-dots', {
     opacity: [0, 1],
     duration: 800,
     ease: 'out(3)'
   })
-  // 2. Then: Show headline text with stagger delay per word
   .add('.hero__word', {
     opacity: [0, 1],
     translateY: [20, 0],
@@ -81,7 +72,6 @@ onMounted(() => {
     ease: 'out(3)',
     delay: $stagger(80)
   }, '+=200')
-  // 3. Then: Show photo container (direction based on screen size)
   .add('.hero__image-card', 
     isMobile ? {
       opacity: [0, 1],
@@ -95,7 +85,6 @@ onMounted(() => {
       ease: 'out(4)'
     }, 
   '+=400')
-  // 4. Finally: Show flower
   .add('.hero__flower', {
     opacity: [0, 1],
     scale: [0.5, 1],
@@ -103,14 +92,12 @@ onMounted(() => {
     duration: 800,
     ease: 'outElastic(1, .8)'
   }, '-=600')
-  // 5. Show action buttons last
   .add('.hero__actions', {
     opacity: [0, 1],
     translateY: [30, 0],
     duration: 700,
     ease: 'out(3)'
   }, '-=400')
-  // 6. After timeline ends, animate highlight words to blue color
   .add('.hero__highlight', {
     color: ['var(--text-primary)'],
     duration: 800,
@@ -118,9 +105,7 @@ onMounted(() => {
     delay: $stagger(150)
   }, '+=300');
 
-  // Add continuous subtle animations after entrance
   setTimeout(() => {
-    // Subtle floating animation to image card
     $animate('.hero__image-card', {
       translateY: [-5, 5],
       duration: 3000,
@@ -129,7 +114,6 @@ onMounted(() => {
       ease: 'inOut'
     });
 
-    // Gentle rotation to flower
     $animate('.hero__flower', {
       rotate: [-5, 5],
       duration: 4000,
@@ -197,7 +181,6 @@ onMounted(() => {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  scroll-snap-align: start;
 }
 
 .hero__bg {
