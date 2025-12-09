@@ -6,8 +6,6 @@
   "logo": "/images/logo-laamp.svg",
   "stack": ["Angular Framework", "SASS", "AWS", "Figma"],
   "achievements": [
-    "Planned and executed the redesign using Angular Framework, SASS, AWS, and Figma for assessment platform THIESS, Australia, defining project scope and timeline while managing all technical dependencies.",
-    "Implemented performance optimization strategies that reduced load times by 45% and increased assessment completion rates by 20%.",
-    "Communicated regularly with stakeholders to gather requirements and provide progress updates, ensuring project alignment with business objectives."
+    "Involved in major rewrite development and design User Interface of certification application focused on mining company"
   ]
 }
