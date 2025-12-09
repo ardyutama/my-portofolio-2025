@@ -1,0 +1,13 @@
+{
+  "company": "Bank UMKM BPR Jatim",
+  "role": "Full Stack Developer Intern",
+  "period": "Jan 2022 – Apr 2022",
+  "location": "Surabaya, Indonesia",
+  "logo": "/images/logo-bpr-jatim.svg",
+  "stack": ["React.js", "Laravel", "REST API"],
+  "achievements": [
+    "Designed and developed the front-end interface of the mailing system with React.js, ensuring a user-friendly experience.",
+    "Integrated the mailing system with Laravel to manage back-end functionality and maintain clean code for the REST API.",
+    "Improved the security of the company's program by enhancing its previous version, effectively safeguarding 200+ employees' sensitive data."
+  ]
+}

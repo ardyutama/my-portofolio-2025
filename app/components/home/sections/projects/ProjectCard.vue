@@ -11,6 +11,99 @@ defineProps({
   liveLink: { type: String, default: '#' }
 });
 
+const { $animate, $stagger } = useNuxtApp();
+
+const githubLinkRef = ref<HTMLElement | null>(null);
+const liveLinkRef = ref<HTMLElement | null>(null);
+
+const animateIconLink = (linkElement: any, labelElement: any, itemElement: any) => {
+  if (!$animate || !linkElement || !labelElement || !itemElement) return;
+
+  const el = linkElement.$el || linkElement;
+  const label = labelElement.$el || labelElement;
+  const item = itemElement.$el || itemElement;
+  if (!el || !label || !item) return;
+
+  const icon = el.querySelector('svg');
+  const letters = label.querySelectorAll('.letter');
+  
+  if (!icon || !letters.length) return;
+
+  el.addEventListener('mouseenter', () => {
+    $animate(icon, {
+      rotate: -10,
+      scale: 1.1,
+      duration: 400,
+      ease: 'out(3)'
+    });
+
+    if (item) {
+      item.style.gridTemplateColumns = 'auto 1fr';
+    }
+    
+    $animate(letters, {
+      translateY: [10, 0],
+      opacity: [0, 1],
+      duration: 400,
+      delay: $stagger(30),
+      ease: 'out(3)'
+    });
+  });
+
+  el.addEventListener('mouseleave', () => {
+    $animate(icon, {
+      rotate: 0,
+      scale: 1,
+      duration: 400,
+      ease: 'out(3)'
+    });
+
+    $animate(letters, {
+      translateY: 0,
+      opacity: 0,
+      duration: 200,
+      ease: 'out(2)'
+    });
+
+    if (item) {
+      setTimeout(() => {
+        item.style.gridTemplateColumns = 'auto 0fr';
+      }, 200);
+    }
+  });
+
+  el.addEventListener('mousedown', () => {
+    $animate(icon, {
+      scale: 0.9,
+      rotate: -5,
+      duration: 100,
+      ease: 'out(2)'
+    });
+  });
+
+  el.addEventListener('mouseup', () => {
+    $animate(icon, {
+      scale: 1.1,
+      rotate: -10,
+      duration: 200,
+      ease: 'out(2)'
+    });
+  });
+};
+
+const githubLabelRef = ref<HTMLElement | null>(null);
+const liveLabelRef = ref<HTMLElement | null>(null);
+const githubItemRef = ref<HTMLElement | null>(null);
+const liveItemRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  if (githubLinkRef.value && githubLabelRef.value && githubItemRef.value) {
+    animateIconLink(githubLinkRef.value, githubLabelRef.value, githubItemRef.value);
+  }
+  if (liveLinkRef.value && liveLabelRef.value && liveItemRef.value) {
+    animateIconLink(liveLinkRef.value, liveLabelRef.value, liveItemRef.value);
+  }
+});
 </script>
 
 <template>
@@ -25,12 +118,22 @@ defineProps({
           <TechTag v-for="tag in tags" :key="tag" :label="tag" />
         </div>
         <div class="project-card__link">
-          <NuxtLink :to="githubLink" target="_blank">
-            <GithubCircle stroke-width="1.5" />
-          </NuxtLink>
-          <NuxtLink :to="liveLink" target="_blank">
-            <ArrowUpRightSquare stroke-width="1.5" />
-          </NuxtLink>
+          <div ref="githubItemRef" class="project-card__link-item">
+            <NuxtLink ref="githubLinkRef" :to="githubLink" target="_blank">
+              <GithubCircle stroke-width="1.5" />
+            </NuxtLink>
+            <span ref="githubLabelRef" class="project-card__link-label">
+              <span v-for="(char, index) in 'GitHub Code'.split('')" :key="index" class="letter">{{ char }}</span>
+            </span>
+          </div>
+          <div ref="liveItemRef" class="project-card__link-item">
+            <NuxtLink ref="liveLinkRef" :to="liveLink" target="_blank">
+              <ArrowUpRightSquare stroke-width="1.5" />
+            </NuxtLink>
+            <span ref="liveLabelRef" class="project-card__link-label">
+              <span v-for="(char, index) in 'Live Website'.split('')" :key="index" class="letter">{{ char }}</span>
+            </span>
+          </div>
         </div>
       </div>
       <h3 class="project-card__title">
@@ -102,9 +205,41 @@ defineProps({
     padding-top: $space-sm;
     display: flex;
     gap: $space-xxs;
+  }
+
+  &__link-item {
+    display: grid;
+    grid-template-columns: auto 0fr;
+    align-items: center;
+    transition: grid-template-columns 0.4s ease;
 
     a {
       color: $token-black;
+      display: inline-flex;
+      cursor: pointer;
+      
+      svg {
+        display: block;
+      }
+    }
+  }
+
+  &__link-label {
+    display: inline-flex;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: $token-black;
+    overflow: hidden;
+    padding-left: $space-xs;
+    pointer-events: none;
+
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      white-space: pre;
     }
   }
 
