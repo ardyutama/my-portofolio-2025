@@ -16,12 +16,13 @@ const { $animate, $stagger } = useNuxtApp();
 const githubLinkRef = ref<HTMLElement | null>(null);
 const liveLinkRef = ref<HTMLElement | null>(null);
 
-const animateIconLink = (linkElement: any, labelElement: any) => {
-  if (!$animate || !linkElement || !labelElement) return;
+const animateIconLink = (linkElement: any, labelElement: any, itemElement: any) => {
+  if (!$animate || !linkElement || !labelElement || !itemElement) return;
 
   const el = linkElement.$el || linkElement;
   const label = labelElement.$el || labelElement;
-  if (!el || !label) return;
+  const item = itemElement.$el || itemElement;
+  if (!el || !label || !item) return;
 
   const icon = el.querySelector('svg');
   const letters = label.querySelectorAll('.letter');
@@ -29,7 +30,6 @@ const animateIconLink = (linkElement: any, labelElement: any) => {
   if (!icon || !letters.length) return;
 
   el.addEventListener('mouseenter', () => {
-    // Animate icon
     $animate(icon, {
       rotate: -10,
       scale: 1.1,
@@ -37,7 +37,10 @@ const animateIconLink = (linkElement: any, labelElement: any) => {
       ease: 'out(3)'
     });
 
-    // Stagger animate letters
+    if (item) {
+      item.style.gridTemplateColumns = 'auto 1fr';
+    }
+    
     $animate(letters, {
       translateY: [10, 0],
       opacity: [0, 1],
@@ -48,7 +51,6 @@ const animateIconLink = (linkElement: any, labelElement: any) => {
   });
 
   el.addEventListener('mouseleave', () => {
-    // Reset icon
     $animate(icon, {
       rotate: 0,
       scale: 1,
@@ -56,13 +58,18 @@ const animateIconLink = (linkElement: any, labelElement: any) => {
       ease: 'out(3)'
     });
 
-    // Hide letters
     $animate(letters, {
       translateY: 0,
       opacity: 0,
       duration: 200,
       ease: 'out(2)'
     });
+
+    if (item) {
+      setTimeout(() => {
+        item.style.gridTemplateColumns = 'auto 0fr';
+      }, 200);
+    }
   });
 
   el.addEventListener('mousedown', () => {
@@ -86,13 +93,15 @@ const animateIconLink = (linkElement: any, labelElement: any) => {
 
 const githubLabelRef = ref<HTMLElement | null>(null);
 const liveLabelRef = ref<HTMLElement | null>(null);
+const githubItemRef = ref<HTMLElement | null>(null);
+const liveItemRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  if (githubLinkRef.value && githubLabelRef.value) {
-    animateIconLink(githubLinkRef.value, githubLabelRef.value);
+  if (githubLinkRef.value && githubLabelRef.value && githubItemRef.value) {
+    animateIconLink(githubLinkRef.value, githubLabelRef.value, githubItemRef.value);
   }
-  if (liveLinkRef.value && liveLabelRef.value) {
-    animateIconLink(liveLinkRef.value, liveLabelRef.value);
+  if (liveLinkRef.value && liveLabelRef.value && liveItemRef.value) {
+    animateIconLink(liveLinkRef.value, liveLabelRef.value, liveItemRef.value);
   }
 });
 </script>
@@ -109,7 +118,7 @@ onMounted(() => {
           <TechTag v-for="tag in tags" :key="tag" :label="tag" />
         </div>
         <div class="project-card__link">
-          <div class="project-card__link-item">
+          <div ref="githubItemRef" class="project-card__link-item">
             <NuxtLink ref="githubLinkRef" :to="githubLink" target="_blank">
               <GithubCircle stroke-width="1.5" />
             </NuxtLink>
@@ -117,7 +126,7 @@ onMounted(() => {
               <span v-for="(char, index) in 'GitHub Code'.split('')" :key="index" class="letter">{{ char }}</span>
             </span>
           </div>
-          <div class="project-card__link-item">
+          <div ref="liveItemRef" class="project-card__link-item">
             <NuxtLink ref="liveLinkRef" :to="liveLink" target="_blank">
               <ArrowUpRightSquare stroke-width="1.5" />
             </NuxtLink>
@@ -204,10 +213,6 @@ onMounted(() => {
     align-items: center;
     transition: grid-template-columns 0.4s ease;
 
-    &:hover {
-      grid-template-columns: auto 1fr;
-    }
-
     a {
       color: $token-black;
       display: inline-flex;
@@ -229,6 +234,7 @@ onMounted(() => {
     color: $token-black;
     overflow: hidden;
     padding-left: $space-xs;
+    pointer-events: none;
 
     .letter {
       display: inline-block;
