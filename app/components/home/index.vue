@@ -54,7 +54,6 @@
 <style lang="scss">
 [data-scroll-section] {
   will-change: opacity, transform;
-  scroll-snap-align: start;
   min-height: 100vh;
 }
 </style>
