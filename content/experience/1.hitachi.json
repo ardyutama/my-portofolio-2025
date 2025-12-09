@@ -4,10 +4,13 @@
   "period": "Feb. 2024 – Present",
   "location": "Bali, Indonesia",
   "logo": "/images/logo-hitachi.svg", 
-  "stack": [""],
+  "stack": ["AngularJS", "JavaScript", "SASS", "Webpack", "Cordova", "Java Spring Boot", "jQuery", "Java Groovy", "Sencha"],
   "achievements": [
-    "Developed a cross-platform mobile eSOMS Clearance app using JavaScript (Angular JS), SCSS, Webpack, Karma, and Cordova.",
-    "Maintained Asset Suite EAM, resolving client-side UI and performance issues with a 20% contribution to total tickets.",
-    "Maintained Data Fidelity System for Lumada EAM by automating migration validation processes using Vanilla Javascript and Java Spring Boot."
+    "Identified and resolved 10+ critical defects in Ellipse EAM core through advanced debugging and risk assessment techniques, implementing 20+ comprehensive unit tests that increased system stability by 45%.",
+    "Managed Asset Suite EAM enhancement project, prioritizing UI/performance issues using JavaScript and Sencha, contributing 20% of sprint deliverables while meeting all project timelines.",
+    "Oversaw eSOMS product development across 4 different mobile applications, resolving 20+ high-priority defects and planning security upgrades that eliminated 20+ vulnerabilities.",
+    "Improved application performance by 52% while managing resources to contribute 50% of the product deliverables using AngularJS, SASS, Webpack, and Cordova.",
+    "Maintained Data Fidelity System for Lumada EAM using Java Spring Boot and jQuery, automating migration comparison processes and reducing validation time by 65%.",
+    "Developed custom Java Groovy scripts for Ellipse EAM batch data migration, leading a cross-functional team, migrating 10,000+ employee records and 120,000+ assets with zero defects for Nashville Electric Service, USA."
   ]
 }

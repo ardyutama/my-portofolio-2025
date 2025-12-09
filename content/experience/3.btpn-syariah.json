@@ -1,0 +1,14 @@
+{
+  "company": "BTPN Syariah",
+  "role": "Project-Based Internship Fullstack Developer",
+  "period": "Nov 2023 – Dec 2023",
+  "location": "Remote",
+  "logo": "/images/logo-btpn.svg",
+  "stack": ["Vue.js", "Java", "Golang", "SQL"],
+  "achievements": [
+    "Attained proficiency in Vue.js, the predominant frontend framework employed within the organization.",
+    "Learned to expertise in Java and Golang, effectively incorporating them into backend applications.",
+    "Acquired a robust comprehension of SQL databases and proficiently executed fundamental queries.",
+    "Built comprehensive API development project as final exercise, demonstrating full-stack capabilities."
+  ]
+}
