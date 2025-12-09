@@ -6,8 +6,6 @@
   "logo": "/images/logo-pinhome.svg",
   "stack": ["Next.js", "Jest", "React"],
   "achievements": [
-    "Enhanced web page performance by improving core web vital scores using Next.js utilities.",
-    "Optimized page performance by migrating pages to separate zones, resulting in better performance scores.",
-    "Ensured proper functioning of web pages through Jest unit tests, improving Lighthouse scores and achieving >2x mobile performance improvement."
+    "Involved in optimizing core web vital of company website using Next.JS"
   ]
 }
