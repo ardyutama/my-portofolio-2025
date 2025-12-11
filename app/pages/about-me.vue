@@ -10,13 +10,13 @@ useHead({
 <template>
     <div class="about-me">
         <div class="about-me__container">
-            <div class="about-me__hero">
+            <NuxtLink to="/" class="about-me__hero">
                 <div class="about-me__hero-container">
                     <img src="/images/hero-image-flower-2.svg" alt="" class="about-me__hero-bg" />
                     <NuxtImg src="/images/ardy-putra-photo-2.png" alt="Ardy Putra" class="about-me__hero-photo"
                         format="webp" />
                 </div>
-            </div>
+            </NuxtLink>
 
             <section class="about-me__quote">
                 <h2 class="about-me__quote-title">“les voyages forment la jeunesse”</h2>
@@ -69,7 +69,9 @@ useHead({
                 </NuxtLink>
             </section>
 
-            <img src="/ardy-putra-logo.svg" alt="Ardy Putra Logo" class="about-me__logo" />
+            <NuxtLink to="/" class="about-me__logo-link">
+                <img src="/ardy-putra-logo.svg" alt="Ardy Putra Logo" class="about-me__logo" />
+            </NuxtLink>
 
         </div>
     </div>
@@ -103,6 +105,13 @@ useHead({
         background-color: $token-yellow;
         overflow: hidden;
         border-radius: 24px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
 
         &-container {
             position: relative;
@@ -223,11 +232,22 @@ useHead({
         }
     }
 
-    &__logo {
+    &__logo-link {
         margin: $space-xl;
+        align-self: center;
+        display: flex;
+        cursor: pointer;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+
+        &:hover {
+            transform: scale(1.1) rotate(5deg);
+            opacity: 0.8;
+        }
+    }
+
+    &__logo {
         width: 48px;
         height: auto;
-        align-self: center;
     }
 }
 </style>
