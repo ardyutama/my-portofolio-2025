@@ -30,7 +30,7 @@ import ConnectMarquee from './ConnectMarquee.vue';
             </template>
             Follow my Github
           </SocialMediaButton>
-          <SocialMediaButton to="#" style="margin-top: 24px;">
+          <SocialMediaButton to="mailto:ardy.putrautama53@gmail.com" style="margin-top: 24px;">
             <template #icon>
               <SendMail />
             </template>

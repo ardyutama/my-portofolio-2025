@@ -134,14 +134,14 @@ onMounted(() => {
     <Header />
     
     <div class="hero__content">
-      <div class="hero__image-card">
+      <NuxtLink to="/about-me" class="hero__image-card">
         <div class="hero__photo-container">
           <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero__photo" format="webp"
             height="200px" preload />
         </div>
         <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero__flower" height="150px"
           preload />
-      </div>
+      </NuxtLink>
       <h1 class="hero__headline">
         I'm Ardy Putra, I'm a
         software engineer focused on
@@ -241,6 +241,13 @@ onMounted(() => {
   overflow: hidden;
   margin-bottom: var(--margin-bottom-xl);
   flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
 
   @include mq('sm') {
     margin: 0px var(--padding-card);
