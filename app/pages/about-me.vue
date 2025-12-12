@@ -8,7 +8,11 @@ useHead({
 </script>
 
 <template>
-    <div class="about-me">
+        <div class="about-me">
+            <div class="about-me__bg">
+                <div class="about-me__grid-bg"></div>
+                <div class="about-me__bg-mask"></div>
+            </div>
         <div class="about-me__container">
             <NuxtLink to="/" class="about-me__hero">
                 <div class="about-me__hero-container">
@@ -79,18 +83,51 @@ useHead({
 
 <style lang="scss" scoped>
 .about-me {
-    padding: $space-lg $space-md;
-    background-color: $token-white;
-    color: $token-black;
-    font-family: $font-family-body;
-    min-height: 100vh;
+    display: flex;
+    position: relative;
+
+    &__bg {
+        display: flex;
+        position: absolute;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__grid-bg {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(to right, #e4e4e7 1px, transparent 1px),
+            linear-gradient(to bottom, #e4e4e7 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 0;
+        opacity: 0.5;
+    }
+
+    &__bg-mask {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bg-main);
+
+        mask-image: radial-gradient(ellipse at center, transparent 20%, black);
+        -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, black);
+    }
 
     &__container {
+        padding: $space-lg $space-md;
+        color: $token-black;
+        font-family: $font-family-body;
+        min-height: 100vh;
         max-width: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         gap: $space-lg;
+        z-index: 3;
 
         @media (min-width: $breakpoint-md) {
             max-width: 600px;
@@ -107,6 +144,7 @@ useHead({
         border-radius: 24px;
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        z-index: 2;
 
         &:hover {
             transform: scale(1.02);
@@ -127,7 +165,7 @@ useHead({
             position: absolute;
             width: 80%;
             height: auto;
-            z-index: 0;
+            z-index: 2;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.1);
@@ -139,7 +177,7 @@ useHead({
 
         &-photo {
             position: relative;
-            z-index: 1;
+            z-index: 3;
             width: 80%;
             height: auto;
             display: block;
@@ -151,7 +189,7 @@ useHead({
     &__quote {
         text-align: left;
         margin-bottom: $space-sm;
-
+        z-index: 3;
         &-title {
             font-family: $font-family-heading;
             font-weight: 700;
@@ -173,7 +211,7 @@ useHead({
         display: flex;
         flex-direction: column;
         gap: $space-md;
-
+        z-index: 3;
         p {
             line-height: 1.6;
             font-size: $font-size-base;
