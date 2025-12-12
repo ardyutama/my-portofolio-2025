@@ -15,7 +15,7 @@ onMounted(() => {
   if (headlineEl) {
     const text = headlineEl.textContent || '';
     const words = text.split(' ');
-    
+
     headlineEl.innerHTML = words.map((word, index) => {
       if (word === 'Ardy' || word === 'Putra,') {
         return `<span class="hero__word hero__highlight">${word}</span>`;
@@ -36,12 +36,12 @@ onMounted(() => {
   });
 
   if (isMobile) {
-    $animeUtils.set('.hero__image-card', {
+    $animeUtils.set('.hero__image-wrapper', {
       opacity: 0,
       translateY: 100
     });
   } else {
-    $animeUtils.set('.hero__image-card', {
+    $animeUtils.set('.hero__image-wrapper', {
       opacity: 0,
       translateX: 100
     });
@@ -58,6 +58,12 @@ onMounted(() => {
     translateY: 30
   });
 
+  $animeUtils.set('.hero__cta', {
+    opacity: 0,
+    scale: 0,
+    rotate: 5
+  });
+
   const heroTimeline = new $Timeline();
 
   heroTimeline.add('.hero__bg-dots', {
@@ -65,48 +71,55 @@ onMounted(() => {
     duration: 800,
     ease: 'out(3)'
   })
-  .add('.hero__word', {
-    opacity: [0, 1],
-    translateY: [20, 0],
-    duration: 600,
-    ease: 'out(3)',
-    delay: $stagger(80)
-  }, '+=200')
-  .add('.hero__image-card', 
-    isMobile ? {
+    .add('.hero__word', {
       opacity: [0, 1],
-      translateY: [100, 0],
-      duration: 1000,
-      ease: 'out(4)'
-    } : {
+      translateY: [20, 0],
+      duration: 600,
+      ease: 'out(3)',
+      delay: $stagger(80)
+    }, '+=200')
+    .add('.hero__image-wrapper',
+      isMobile ? {
+        opacity: [0, 1],
+        translateY: [100, 0],
+        duration: 1000,
+        ease: 'out(4)'
+      } : {
+        opacity: [0, 1],
+        translateX: [100, 0],
+        duration: 1000,
+        ease: 'out(4)'
+      },
+      '+=400')
+    .add('.hero__flower', {
       opacity: [0, 1],
-      translateX: [100, 0],
+      scale: [0.5, 1],
+      rotate: [-20, 0],
+      duration: 800,
+      ease: 'outElastic(1, .8)'
+    }, '-=600')
+    .add('.hero__actions', {
+      opacity: [0, 1],
+      translateY: [30, 0],
+      duration: 700,
+      ease: 'out(3)'
+    }, '-=400')
+    .add('.hero__highlight', {
+      color: ['var(--text-primary)'],
+      duration: 800,
+      ease: 'out(3)',
+      delay: $stagger(150)
+    }, '+=300')
+    .add('.hero__cta', {
+      opacity: [0, 1],
+      scale: [0, 1],
+      rotate: 5,
       duration: 1000,
-      ease: 'out(4)'
-    }, 
-  '+=400')
-  .add('.hero__flower', {
-    opacity: [0, 1],
-    scale: [0.5, 1],
-    rotate: [-20, 0],
-    duration: 800,
-    ease: 'outElastic(1, .8)'
-  }, '-=600')
-  .add('.hero__actions', {
-    opacity: [0, 1],
-    translateY: [30, 0],
-    duration: 700,
-    ease: 'out(3)'
-  }, '-=400')
-  .add('.hero__highlight', {
-    color: ['var(--text-primary)'],
-    duration: 800,
-    ease: 'out(3)',
-    delay: $stagger(150)
-  }, '+=300');
+      ease: 'outElastic(1, .5)'
+    }, '-=200');
 
   setTimeout(() => {
-    $animate('.hero__image-card', {
+    $animate('.hero__image-wrapper', {
       translateY: [-5, 5],
       duration: 3000,
       alternate: true,
@@ -132,15 +145,20 @@ onMounted(() => {
       <div class="hero__bg-mask"></div>
     </div>
     <Header />
-    
+
     <div class="hero__content">
-      <NuxtLink to="/about-me" class="hero__image-card">
-        <div class="hero__photo-container">
-          <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero__photo" format="webp"
-            height="200px" preload />
+      <NuxtLink to="/about-me" class="hero__image-wrapper">
+        <div class="hero__cta">
+          Click Me!
         </div>
-        <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero__flower" height="150px"
-          preload />
+        <div class="hero__image-visual">
+          <div class="hero__photo-container">
+            <NuxtImg src="/images/ardy-putra-photo.png" alt="Ardy Putra" class="hero__photo" format="webp"
+              height="200px" preload />
+          </div>
+          <NuxtImg src="/images/hero-image-flower.svg" alt="Hero Image Flower" class="hero__flower" height="150px"
+            preload />
+        </div>
       </NuxtLink>
       <h1 class="hero__headline">
         I'm Ardy Putra, I'm a
@@ -161,7 +179,8 @@ onMounted(() => {
           Get in Touch
         </HeroButton>
 
-        <HeroButton to="https://drive.google.com/file/d/1yBITsf0xKBk6UwJnFif5u0lEmybSq2U0/view?usp=sharing" variant="outline" target="_blank">
+        <HeroButton to="https://drive.google.com/file/d/1yBITsf0xKBk6UwJnFif5u0lEmybSq2U0/view?usp=sharing"
+          variant="outline" target="_blank">
           My Resume
         </HeroButton>
       </div>
@@ -185,7 +204,7 @@ onMounted(() => {
 
 .hero__bg {
   position: absolute;
-  inset: 0; 
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
@@ -198,7 +217,7 @@ onMounted(() => {
   height: 100%;
   width: 100%;
   background-size: 20px 20px;
-  
+
   background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
 }
 
@@ -216,7 +235,7 @@ onMounted(() => {
 
 .hero__content {
   position: relative;
-  z-index: 1; 
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -229,28 +248,73 @@ onMounted(() => {
   }
 }
 
-.hero__image-card {
+.hero__image-wrapper {
   position: relative;
   width: 150px;
   height: 225px;
+  margin-bottom: var(--margin-bottom-xl);
+  flex-shrink: 0;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+
+  @include mq('sm') {
+    margin: 0px var(--padding-card);
+  }
+
+  &:hover .hero__image-visual {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.hero__image-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 24px;
   background-color: var(--bg-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: var(--margin-bottom-xl);
-  flex-shrink: 0;
-  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+.hero__cta {
+  position: absolute;
+  top: -20px;
+  right: -25px;
+  background-color: #fff;
+  border: 2px solid #000;
+  padding: 8px 12px;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  box-shadow: 4px 4px 0px 0px #000;
+  z-index: 10;
+  transform: rotate(5deg);
+  border-radius: 0px;
+  white-space: nowrap;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+    transform: rotate(45deg);
   }
 
   @include mq('sm') {
-    margin: 0px var(--padding-card);
+    top: -30px;
+    right: -40px;
+    font-size: 0.9rem;
   }
 }
 
