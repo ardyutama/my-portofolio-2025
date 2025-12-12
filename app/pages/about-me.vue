@@ -1,24 +1,142 @@
 <script setup lang="ts">
+const { $animate, $stagger, $animeUtils } = useNuxtApp();
+
 useHead({
     title: 'About Me - Ardy Putra',
     meta: [
         { name: 'description', content: 'About Ardy Putra' }
     ]
 })
+
+onMounted(() => {
+    const quoteTitle = document.querySelector('.about-me__quote-title');
+    if (quoteTitle && quoteTitle.textContent) {
+        const text = quoteTitle.textContent.trim();
+        const words = text.split(' ');
+        quoteTitle.innerHTML = words.map(word => `<span class="quote-word" style="display:inline-block;">${word}&nbsp;</span>`).join('');
+    }
+
+    $animeUtils.set('.about-me__hero-visual', {
+        scale: 0.8,
+        rotate: -5,
+        opacity: 0
+    });
+
+    $animeUtils.set('.about-me__back-cta', {
+        scale: 0,
+        opacity: 0,
+        rotate: 15
+    });
+
+    $animeUtils.set('.quote-word', { opacity: 0, translateY: 20, rotate: 10 });
+    $animeUtils.set('.about-me__quote-subtitle', { opacity: 0, translateX: -20 });
+    $animeUtils.set('.about-me__content p', { opacity: 0, translateY: 30 });
+    $animeUtils.set('.about-me__showcase', { opacity: 0, scale: 0.9, rotate: 2 });
+    $animeUtils.set('.about-me__cta', { opacity: 0, translateY: 50 });
+
+    $animate('.about-me__hero-visual', {
+        scale: [0.8, 1],
+        opacity: [0, 1],
+        rotate: [-5, 0],
+        duration: 1000,
+        ease: 'outElastic(1, .6)',
+        delay: 200
+    });
+
+    $animate('.about-me__back-cta', {
+        scale: [0, 1],
+        opacity: [0, 1],
+        rotate: [15, -5],
+        duration: 800,
+        ease: 'outElastic(1, .5)',
+        delay: 800
+    });
+
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+
+                if (target.classList.contains('about-me__quote')) {
+                    $animate('.quote-word', {
+                        opacity: [0, 1],
+                        translateY: [20, 0],
+                        rotate: [10, 0],
+                        duration: 800,
+                        delay: $stagger(100),
+                        ease: 'outBack'
+                    });
+                    $animate('.about-me__quote-subtitle', {
+                        opacity: [0, 1],
+                        translateX: [-20, 0],
+                        duration: 800,
+                        delay: 600,
+                        ease: 'out(3)'
+                    });
+                } else if (target.tagName.toLowerCase() === 'p') {
+                    $animate(target, {
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 800,
+                        ease: 'out(3)'
+                    });
+                } else if (target.classList.contains('about-me__showcase')) {
+                    $animate(target, {
+                        opacity: [0, 1],
+                        scale: [0.9, 1],
+                        rotate: [2, 0],
+                        duration: 1000,
+                        ease: 'outElastic(1, .8)'
+                    });
+                } else if (target.classList.contains('about-me__cta')) {
+                    $animate(target, {
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 800,
+                        ease: 'out(3)'
+                    });
+                }
+
+                observer.unobserve(target);
+            }
+        });
+    }, observerOptions);
+
+    const elementsToObserve = [
+        document.querySelector('.about-me__quote'),
+        ...document.querySelectorAll('.about-me__content p'),
+        document.querySelector('.about-me__showcase'),
+        document.querySelector('.about-me__cta')
+    ];
+
+    elementsToObserve.forEach(el => {
+        if (el) observer.observe(el);
+    });
+});
 </script>
 
 <template>
-        <div class="about-me">
-            <div class="about-me__bg">
-                <div class="about-me__grid-bg"></div>
-                <div class="about-me__bg-mask"></div>
-            </div>
+    <div class="about-me">
+        <div class="about-me__bg">
+            <div class="about-me__grid-bg"></div>
+            <div class="about-me__bg-mask"></div>
+        </div>
         <div class="about-me__container">
             <NuxtLink to="/" class="about-me__hero">
-                <div class="about-me__hero-container">
-                    <img src="/images/hero-image-flower-2.svg" alt="" class="about-me__hero-bg" />
-                    <NuxtImg src="/images/ardy-putra-photo-2.png" alt="Ardy Putra" class="about-me__hero-photo"
-                        format="webp" />
+                <div class="about-me__back-cta">
+                    Back
+                </div>
+                <div class="about-me__hero-visual">
+                    <div class="about-me__hero-container">
+                        <img src="/images/hero-image-flower-2.svg" alt="" class="about-me__hero-bg" />
+                        <NuxtImg src="/images/ardy-putra-photo-2.png" alt="Ardy Putra" class="about-me__hero-photo"
+                            format="webp" />
+                    </div>
                 </div>
             </NuxtLink>
 
@@ -139,16 +257,28 @@ useHead({
         justify-content: center;
         align-items: center;
         margin-bottom: $space-md;
-        background-color: $token-yellow;
-        overflow: hidden;
-        border-radius: 24px;
+        position: relative;
+        text-decoration: none;
         cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
         z-index: 2;
+        /* Removed overflow hidden to let CTA pop out */
 
         &:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            .about-me__hero-visual {
+                transform: scale(1.02);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        &-visual {
+            background-color: $token-yellow;
+            overflow: hidden;
+            border-radius: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
         }
 
         &-container {
@@ -190,6 +320,7 @@ useHead({
         text-align: left;
         margin-bottom: $space-sm;
         z-index: 3;
+
         &-title {
             font-family: $font-family-heading;
             font-weight: 700;
@@ -212,6 +343,7 @@ useHead({
         flex-direction: column;
         gap: $space-md;
         z-index: 3;
+
         p {
             line-height: 1.6;
             font-size: $font-size-base;
@@ -267,6 +399,38 @@ useHead({
                 transform: translate(-2px, -2px);
                 box-shadow: 8px 8px 0px 0px $token-black;
             }
+        }
+    }
+
+    &__back-cta {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        background-color: #fff;
+        border: 2px solid $token-black;
+        padding: 8px 12px;
+        color: $token-black;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        box-shadow: 4px 4px 0px 0px $token-black;
+        z-index: 10;
+        transform: rotate(-5deg);
+        border-radius: 0px;
+        white-space: nowrap;
+        pointer-events: none;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 15px;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-bottom: 2px solid $token-black;
+            border-right: 2px solid $token-black;
+            transform: rotate(45deg);
         }
     }
 
