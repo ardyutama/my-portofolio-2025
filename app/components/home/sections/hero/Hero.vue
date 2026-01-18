@@ -179,7 +179,7 @@ onMounted(() => {
           Get in Touch
         </HeroButton>
 
-        <HeroButton to="https://drive.google.com/file/d/1yBITsf0xKBk6UwJnFif5u0lEmybSq2U0/view?usp=sharing"
+        <HeroButton to="https://drive.google.com/file/d/1FBXFnzYMQMAlxfDoyybskJoZz5lN5-RH/view?usp=sharing"
           variant="outline" target="_blank">
           My Resume
         </HeroButton>

@@ -40,7 +40,7 @@ import ConnectMarquee from './ConnectMarquee.vue';
       </div>
       <div class="connect__copyright-footer">
             <Copyright />
-            <h4>2025 Ardy Putra Utama</h4>
+            <h4>2026 Ardy Putra Utama</h4>
           </div>
     </div>
   </section>
